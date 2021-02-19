@@ -2,7 +2,13 @@
 
 ## Installation
 
-Testing this atm
+You will need NodeJs installed for any of the below to work
+After you have that installed, we will need to install some additional things to run the application.
+
+In the root directory of the project, run the following commands to install the needed dependencies:
+
+`npm i --save-dev electron electron-build-env neon-cli jquery`
+`npx @electron-forge/cli import`
 
 ## Running
 
