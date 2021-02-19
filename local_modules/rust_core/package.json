@@ -1,0 +1,13 @@
+{
+  "name": "rust_core",
+  "version": "0.1.0",
+  "description": "Core Rust Module for YATM",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.7.1"
+  },
+  "scripts": {
+    "install": "neon build"
+  }
+}

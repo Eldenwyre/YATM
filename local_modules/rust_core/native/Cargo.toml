@@ -1,0 +1,18 @@
+[package]
+name = "rust_core"
+version = "0.1.0"
+license = "MIT"
+build = "build.rs"
+edition = "2018"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "rust_core"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+neon-build = "0.7.1"
+
+[dependencies]
+neon = "0.7.1"
+num_cpus = "1.4.0"
