@@ -17,13 +17,6 @@ fn thread_count(mut cx: FunctionContext) -> JsResult<JsNumber> {
     Ok(cx.number(num_cpus::get() as f64))
 }
 
-#[derive(Serialize, Deserialize)]
-struct PlaceHolder {
-    
-    name: String,
-    age: u8, 
-}
-
 // Export the function so it can be exported in index.json_io
 // Simply add another cx.export_function line for each function
 // you want to export
