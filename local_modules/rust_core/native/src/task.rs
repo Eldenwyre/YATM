@@ -1,7 +1,7 @@
 extern crate chrono;
-use chrono::{NaiveDateTime, NaiveDate};
+use chrono::{NaiveDateTime};
 
-struct Task {
+pub struct Task {
     title: String, // Task title
     description: String, // Task description
     date: chrono::NaiveDateTime, // Due date of the task, 
@@ -62,6 +62,7 @@ impl Task {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use chrono::{ NaiveDate };
 
     #[test]
     fn test_task_new() {
