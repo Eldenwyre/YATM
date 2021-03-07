@@ -3,6 +3,9 @@
 
 use std::fs;
 
+extern crate serde;
+extern crate serde_json;
+
 /*
  * fn: readJsonFile
  * Desc: Read from a JSON file, and unwrap into an Object
