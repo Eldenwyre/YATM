@@ -116,12 +116,15 @@ pub struct RepeatableTask {
 // Constructor(s) for RepeatableTask
 impl RepeatableTask {
     // NOTE: THIS SHOULD NOT BE USED WITH AN EXISTING Task UNLESS USED WITH Task::clone()
-    ///             Example: RepeatableTask::new_w_task(t.clone(), 50, 50) //Note t is a Task
+    //          Otherwise there may run into an issue with borrowing/ownership (Not good, fatal crash)
+    /////Example: 
+    /////       let rt = RepeatableTask::new_w_task(task.clone(), 50, 50) //Note task is a Task defined earlier
     // !!!USE WITH CAUTION!!!
     pub fn new_w_task(task_clone: Task, repeat_increment: i32, repeats: i32) -> Self {
         Self {task: task_clone, repeat_increment: repeat_increment, repeats: repeats}
     }
 
+    //Creates new RepeatableTask with given values
     pub fn new(title: &str, description: &str, date: chrono::NaiveDateTime, reward: i32, subtasks: Vec<String>, repeat_increment: i32, repeats: i32) -> Self { 
         Self {task: Task::new(title, description, date, reward, subtasks), repeat_increment: repeat_increment, repeats: repeats }
     }
