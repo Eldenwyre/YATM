@@ -1,5 +1,5 @@
 extern crate chrono;
-use chrono::{NaiveDateTime};
+use chrono::{Duration, NaiveDateTime};
 
 // (Basic) Task Struct
 #[derive(Clone)]
@@ -109,7 +109,7 @@ mod task_tests {
 #[derive(Clone)]
 pub struct RepeatableTask {
     task: Task, // Task data
-    repeat_increment: i32, // Number of days between each repeat. 0 for infinitely, 1 for daily, 7 for weekly
+    repeat_increment: i32, // Number of days between each repeat. 0 for present at all times, 1 for daily, 7 for weekly
     repeats: i32 // Number of times task can be repeated. -1 for infinitely repeatable
 }
 
@@ -180,8 +180,21 @@ impl RepeatableTask {
     pub fn set_repeats(&mut self, repeats: i32) { self.repeats = repeats }
 }
 
+//More functions for RepeatableTask
+impl RepeatableTask {
+    //complete_task: Advances Self to next state, adjusts date by repeat increment days and reduces repeats by 1
+    // Returns value of repeats
+    pub fn complete_task(&mut self) {
+        self.set_date(self.get_date() + Duration::days(self.repeat_increment.into()));
+        if self.get_repeats() > 0 {
+            self.set_repeats(self.get_repeats() - 1);
+        }
+        self.get_repeats();
+    }
+}
 
-//Unit tests for basic tasks
+
+//Unit tests for RepeatableTasks
 #[cfg(test)]
 mod repeatabletask_tests {
     use super::*;
@@ -294,5 +307,28 @@ mod repeatabletask_tests {
         assert_eq!(t.get_date(),NaiveDate::from_ymd(1976,5,3).and_hms(3,2,1));
         assert_eq!(t.get_reward(),1);
         assert_eq!(t.get_subtasks().clone(), vec!["monke".to_string(),"ape".to_string(),"chimp".to_string()]);
+    }
+
+    #[test]
+    fn test_complete_task() {
+        //Test with task based creation
+        let title = "TITLE";
+        let description = "DESCRIPTION";
+        let date = NaiveDate::from_ymd(2000,01,17).and_hms(1,2,3);
+        let reward = 50;
+        let subtasks = vec!["1".to_string(),"2".to_string(),"3333".to_string()];
+        let repeat_increment = 7;
+        let repeats = 10;
+        let t = Task::new(title,description,date,reward,subtasks.clone());
+        let mut task = RepeatableTask::new_w_task(t.clone(),repeat_increment,repeats);
+        task.complete_task();
+        assert_eq!(task.get_date(),NaiveDate::from_ymd(2000,01,24).and_hms(1,2,3));
+        assert_eq!(task.get_repeats(),repeats-1);
+        //Test with value based creation
+        let repeat_increment_t2 = 366;
+        let mut task2 = RepeatableTask::new(title,description,date,reward,subtasks,repeat_increment_t2,-1);
+        task2.complete_task();
+        assert_eq!(task2.get_date(),NaiveDate::from_ymd(2001,01,17).and_hms(1,2,3));
+        assert_eq!(task2.get_repeats(),-1);
     }
 }
