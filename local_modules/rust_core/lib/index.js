@@ -1,5 +1,8 @@
-// Main entry point for the node module
+const addon = require('../native/index.node');
 
-var addon = require('../native');
+// Simply add name of functions here to export them
+const {
+  threadCount,
+} = addon;
 
-module.exports = addon.threadCount;
+module.exports = addon;
