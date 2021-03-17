@@ -73,3 +73,30 @@ Because neon and electron use different node verisons, we must build it using `e
 After we have built our `rust_core` module, we can actually run the electron application with `electron-forge` using the following command: 
 
 `$ npm start`
+
+## Packaging for Distribution
+
+* Build application using `electron-packager`
+* Will create a directory with an executable and other needed files for running
+
+## Dependencies
+
+`# npm install electron-packager -g`
+
+## Building Packages
+
+### Linux
+
+`electron-packager ./YATM yet-another-task-manager --platform=linux --arch=x64`
+
+### Windows
+
+`electron-packager ./YATM yet-another-task-manager --platform=win32 --arch=x64`
+
+### MacOS
+
+`electron-packager ./YATM yet-another-task-manager --platform=darwin --arch=x64`
+
+* For Mac App Store
+
+`electron-packager ./YATM yet-another-task-manager --platform=mas --arch=x64`
