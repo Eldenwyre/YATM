@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>YATM</title>
+
+    <!-- Source our external script, which will allow us to change
+         the values of the below elements-->
+    
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    
+  </head>
+
+  <body style="background: rgb(240, 200, 200);">
+
+    <center><h1>TASKS!</center></h1>
+    <!-- Here we are going ot use the <a> tag, referenced by the id element 
+         in our external script (loaded above) using Jquery -->
+    <p>
+        <button id="close" style="float: right;">Close!</button>
+
+    </p>
+
+  </body>
+
+
+
+  <script src="external.js">
+    window.$ = window.jquery = require("jquery");
+    window.popper = require("popper.js");
+    require("bootstrap");
+    require("./renderer.js");
+  </script>
+  
+  
+
+  
+</html>
+
+<script type="text/javascript">
+  const ipcRenderer = require('electron').ipcRenderer; 
+  const close = document.getElementById('close');
+  close.addEventListener('click', function () {
+      var arg ="secondparam";
+      ipcRenderer.send("taskclose", arg); // ipcRender.send will pass the information to main process
+  });
+
+</script>
+

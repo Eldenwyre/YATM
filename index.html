@@ -3,22 +3,64 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>YATM</title>
 
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
-    <script src="external.js"></script>
+    
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    
   </head>
 
-  <body style="background: white;">
+  <body style="background: rgb(255, 225, 225);">
 
-    <h1>Hello World!</h1>
+    <center><h1>Welcome to YATM!</center></h1>
     <!-- Here we are going ot use the <a> tag, referenced by the id element 
          in our external script (loaded above) using Jquery -->
     <p>
-    We are using node <script>document.write(process.versions.node)</script>, Chrome <script>document.write(process.versions.chrome)</script>, Electron <script>document.write(process.versions.electron)</script>, and <a id=thread-count></a> Threads.
+    
     </p>
 
   </body>
 
+  <!--Creating buttons to transition to the skills and tasks panes respectively-->
+  <button id="loadskills" style="float: left;">Skills</button>
+  <button id="loadtasks" style="float: right;">Tasks</button>
+
+  <script src="external.js">
+    window.$ = window.jquery = require("jquery");
+    window.popper = require("popper.js");
+    require("bootstrap");
+    require("./renderer.js");
+  </script>
+  
+  <body style = "font-size: large;">
+    <center>Insert character here</center>
+  </body>
+
+  
+  
 </html>
+
+<!--Calls a function to open the skills.html file on screen-->
+<script type="text/javascript">
+  const ipcRenderer = require('electron').ipcRenderer; 
+  const skillclick = document.getElementById('loadskills');
+  skillclick.addEventListener('click', function () {
+      var arg ="secondparam";
+      
+      ipcRenderer.send("skillclick", arg); // ipcRender.send will pass the information to main process
+  });
+  
+  const taskclick = document.getElementById('loadtasks');
+  taskclick.addEventListener('click', function () {
+      var arg ="thirdparam";
+      
+      ipcRenderer.send("taskclick", arg); //Calls to open the tasks.html file on screen
+  });
+</script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  

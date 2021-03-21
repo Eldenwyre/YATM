@@ -1,39 +1,83 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
 
-app.allowRendererProcessReuse = false
+let win;
+let skills;
+let tasks;
 
-// Proof of concept, this is how you would access our rust module in main
-// var threadCount = require('./local_modules/test_module')
-// var numThreads = threadCount()
-// console.log(numThreads)
+app.allowRendererProcessReuse = true
 
 // Function for creating the application window
-function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+app.on('ready', function createWindow () {
+  win = new BrowserWindow({
+    menuBarVisibility: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+    show: false
     }
   });
+  win.loadFile('index.html');
 
   // File to render for the application window
-  win.loadFile('index.html');
-}
+  win.once('ready-to-show', () => {
+    win.maximize()
+    win.show()
+  });
 
-// Create the application window
-app.whenReady().then(createWindow)
+  
+});
+
+
+
+ipcMain.on("skillclick", (event) => {
+  skills = new BrowserWindow({ parent: win,
+    frame: false,
+    show: false 
+  })
+  position = win.getPosition()
+  size = win.getSize()
+  skills.setPosition(position[0]+6, position[1]+55)
+  skills.setSize(size[0]/4, size[1]-55)
+  skills.loadFile('skills.html')
+  skills.show();
+// inform the render process that the assigned task finished. Show a message in html
+// event.sender.send in ipcMain will return the reply to renderprocess
+  skills.on('close', function () {
+    skills.hide();
+    event.preventDefault();
+  })
+});
+
+ipcMain.on("taskclick", (event) => {
+  tasks = new BrowserWindow({ parent: win,
+    frame: false,
+    show: false 
+  })
+  position = win.getPosition()
+  size = win.getSize()
+  x = size[0]*.75
+  y = size[1]
+  tasks.setPosition(x-6, position[1]+55)
+  tasks.setSize(size[0]/4, size[1]-55)
+  tasks.loadFile('tasks.html')
+  tasks.show();
+// inform the render process that the assigned task finished. Show a message in html
+// event.sender.send in ipcMain will return the reply to renderprocess
+});
+
+ipcMain.on("skillclose", (event) => {
+  skills.hide();
+  win.show();
+});
+
+ipcMain.on("taskclose", (event) => {
+  tasks.hide();
+  win.show();
+});
 
 // Quit the application when all windows are closed
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
+});
 
-// Prevent loading multiple of the same window or something
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
