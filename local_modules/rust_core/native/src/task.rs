@@ -14,6 +14,7 @@ pub struct Task {
 }
 
 // Constructor for Task
+//REVIEW: May need to change subtasks vec to subtasks.clone() ?
 impl Task {
     pub fn new(title: &str, description: &str, date: chrono::NaiveDateTime, reward: i32, subtasks: Vec<String>) -> Self {
         Self {title: title.to_string(), description: description.to_string(), date: date, reward: reward, subtasks: subtasks}
