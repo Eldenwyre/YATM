@@ -127,6 +127,11 @@ mod skill_tests{
 
     #[test]
     fn test_level(){
-        
+        let mut skill = Skill::new("Skill","DescSkill",1,Vec::new());
+        assert_eq!(skill.get_level(), 0);
+        skill.set_xp(250000);
+        assert_eq!(skill.get_level(),250);
+        skill.set_xp(25);
+        assert_eq!(skill.get_level(),1);
     }
 }
