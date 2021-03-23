@@ -2,7 +2,7 @@ extern crate chrono;
 use chrono::{Duration, NaiveDateTime};
 
 // (Basic) Task Struct
-#[derive(Clone)]
+#[derive(Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct Task {
     title: String, // Task title
     description: String, // Task description
@@ -107,7 +107,7 @@ mod task_tests {
 
 
 // RepeatableTask Struct
-#[derive(Clone)]
+#[derive(Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct RepeatableTask {
     task: Task, // Task data
     repeat_increment: i32, // Number of days between each repeat. 0 for present at all times, 1 for daily, 7 for weekly
