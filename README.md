@@ -74,6 +74,10 @@ After we have built our `rust_core` module, we can actually run the electron app
 
 `$ npm start`
 
+### Running Rust Unit Tests
+
+To run unit tests, change into `local_modules/rust_core/native/` and run `cargo test` to run the rust unit tests
+
 ## Packaging for Distribution
 
 * Build application using `electron-packager`
