@@ -8,8 +8,8 @@
  *  }
  *
  * fn main() {
- *   let file_name = String::from("src/saves/test.json");
- *   let new_file_name = String::from("src/saves/new_test.json");
+ *   let file_name = "src/saves/test.json";
+ *   let new_file_name = "src/saves/new_test.json";
  *
  *
  *   let mut p: PlaceHolder = readJsonFile(file_name);
@@ -21,12 +21,12 @@
  *
  *   writeJsonFile(new_file_name, p);
  *
- *   let p_vec: Vec<PlaceHolder> = readJsonFile("src/saves/json-array-test.json".to_string());
+ *   let p_vec: Vec<PlaceHolder> = readJsonFile("src/saves/json-array-test.json");
  *
  *   let ser_vec = serde_json::to_string(&p_vec).unwrap();
  *   println!("PlaceHolder Object Vector: {}", ser_vec);
  *
- *   writeJsonFile("src/saves/new-json-arrary-test.json".to_string(), p_vec);
+ *   writeJsonFile("src/saves/new-json-arrary-test.json", p_vec);
  * }
  */
 
