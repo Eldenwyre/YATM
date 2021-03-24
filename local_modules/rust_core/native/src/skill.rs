@@ -1,7 +1,7 @@
 use crate::task::{Task, RepeatableTask};
 
 // Skill Struct
-#[derive(Clone)]
+#[derive(Clone, serde_derive::Serialize, serde_derive::Deserialize)]
 pub struct Skill {
     title: String, // Skill Title
     description: String, // Skill Description

@@ -12,9 +12,9 @@ crate-type = ["cdylib"]
 
 [build-dependencies]
 neon-build = "0.7.1"
-chrono = "0.4"
 
 [dependencies]
+chrono = { version = "0.4", features = ["serde"] }
 neon = "0.7.1"
 num_cpus = "1.4.0"
 serde = "1.0"
