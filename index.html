@@ -15,12 +15,15 @@
   <body style="background: rgb(255, 225, 225);">
 
     <center><h1>Welcome to YATM!</center></h1>
-    <!-- Here we are going ot use the <a> tag, referenced by the id element 
-         in our external script (loaded above) using Jquery -->
-    <p>
-    
-    </p>
 
+    <div class="Character">
+      Insert Character Here
+    </div>
+
+    <!--Button to close the program-->
+    <div class="Exit">
+      <button id="exit">Exit</button>
+    </div>
   </body>
 
   <!--Creating buttons to transition to the skills and tasks panes respectively-->
@@ -33,13 +36,28 @@
     require("bootstrap");
     require("./renderer.js");
   </script>
+ 
   
-  <body style = "font-size: large;">
-    <center>Insert character here</center>
-  </body>
+  <style>
+    /*Sets the character to the center of the screen*/
+    .Character{ 
+      top: 50%; 
+      left: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+    }
 
-  
-  
+    /*Places an exit button at the top right of the screen*/
+    .Exit{
+      border: 0.15em solid #000000;
+      top: 0%;
+      right: 0%;
+      position: fixed;
+      transform: translate(-50%, 50%);
+      background-color: red;
+    }
+  </style>
+
 </html>
 
 <!--Calls a function to open the skills.html file on screen-->
@@ -47,20 +65,19 @@
   const ipcRenderer = require('electron').ipcRenderer; 
   const skillclick = document.getElementById('loadskills');
   skillclick.addEventListener('click', function () {
-      var arg ="secondparam";
-      
-      ipcRenderer.send("skillclick", arg); // ipcRender.send will pass the information to main process
+      ipcRenderer.send("skillclick"); // ipcRender.send will pass the information to main process
   });
   
   const taskclick = document.getElementById('loadtasks');
   taskclick.addEventListener('click', function () {
-      var arg ="thirdparam";
-      
-      ipcRenderer.send("taskclick", arg); //Calls to open the tasks.html file on screen
+      ipcRenderer.send("taskclick"); //Calls to open the tasks.html file on screen
+  });
+  
+  const quit = document.getElementById('exit');
+  quit.addEventListener('click', function () {
+    ipcRenderer.send("exit");
   });
 </script>
-
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   

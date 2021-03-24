@@ -15,16 +15,11 @@
   <body style="background: rgb(240, 200, 200);">
 
     <center><h1>TASKS!</center></h1>
-    <!-- Here we are going ot use the <a> tag, referenced by the id element 
-         in our external script (loaded above) using Jquery -->
-    <p>
-        <button id="close" style="float: right;">Close!</button>
 
-    </p>
+    <!--Adds a button to close the task menu-->
+    <button id="taskclose" style="float: right;">Close!</button>
 
   </body>
-
-
 
   <script src="external.js">
     window.$ = window.jquery = require("jquery");
@@ -33,18 +28,15 @@
     require("./renderer.js");
   </script>
   
-  
-
-  
 </html>
 
+<!--Script to call the main file to close the task menu-->
 <script type="text/javascript">
   const ipcRenderer = require('electron').ipcRenderer; 
-  const close = document.getElementById('close');
-  close.addEventListener('click', function () {
-      var arg ="secondparam";
-      ipcRenderer.send("taskclose", arg); // ipcRender.send will pass the information to main process
+  const taskclose = document.getElementById('taskclose');
+  taskclose.addEventListener('click', function () {
+      ipcRenderer.send("taskclose"); // ipcRender.send will pass the information to main process
   });
-
 </script>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

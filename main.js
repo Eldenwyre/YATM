@@ -9,7 +9,9 @@ app.allowRendererProcessReuse = true
 // Function for creating the application window
 app.on('ready', function createWindow () {
   win = new BrowserWindow({
-    menuBarVisibility: false,
+    frame: false,
+    resizable: false,
+    fullscreen: true,
     webPreferences: {
       nodeIntegration: true,
     show: false
@@ -19,59 +21,62 @@ app.on('ready', function createWindow () {
 
   // File to render for the application window
   win.once('ready-to-show', () => {
-    win.maximize()
     win.show()
   });
-
-  
 });
-
-
 
 ipcMain.on("skillclick", (event) => {
   skills = new BrowserWindow({ parent: win,
     frame: false,
-    show: false 
+    show: false,
+    webPreferences: {
+      nodeIntegration: true 
+    }
   })
-  position = win.getPosition()
+  position = win.getPosition() //Skill menu is set to take up the left third of the window
+  //and will do so by checking the window
   size = win.getSize()
-  skills.setPosition(position[0]+6, position[1]+55)
-  skills.setSize(size[0]/4, size[1]-55)
+  skills.setPosition(position[0], position[1]+40)
+  skills.setSize(Math.round(size[0]/3), size[1]-40)
   skills.loadFile('skills.html')
   skills.show();
 // inform the render process that the assigned task finished. Show a message in html
 // event.sender.send in ipcMain will return the reply to renderprocess
-  skills.on('close', function () {
-    skills.hide();
-    event.preventDefault();
-  })
 });
 
 ipcMain.on("taskclick", (event) => {
   tasks = new BrowserWindow({ parent: win,
     frame: false,
-    show: false 
+    show: false,
+    webPreferences: {
+      nodeIntegration: true 
+    }
   })
   position = win.getPosition()
   size = win.getSize()
-  x = size[0]*.75
-  y = size[1]
-  tasks.setPosition(x-6, position[1]+55)
-  tasks.setSize(size[0]/4, size[1]-55)
+  x = Math.round(size[0]*(2/3)) //To set the task menu on the right side of the screen
+  tasks.setPosition(x, position[1]+40)
+  tasks.setSize(Math.round(size[0]/3), size[1]-40)
   tasks.loadFile('tasks.html')
   tasks.show();
 // inform the render process that the assigned task finished. Show a message in html
 // event.sender.send in ipcMain will return the reply to renderprocess
 });
 
+//Closes the skills window and puts the focus back on the main window
 ipcMain.on("skillclose", (event) => {
-  skills.hide();
-  win.show();
+  win.show()
+  skills.hide()
 });
 
+//Closes the tasks window
 ipcMain.on("taskclose", (event) => {
-  tasks.hide();
-  win.show();
+  win.show()
+  tasks.hide()
+});
+
+ipcMain.on("exit", (event) => {
+  app.quit()
 });
 
 // Quit the application when all windows are closed
