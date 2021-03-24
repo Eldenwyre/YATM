@@ -83,6 +83,8 @@ pub fn writeJsonFile<T: serde::Serialize>(f_name: &str, t: T) {
 
 #[test]
 fn testerThing() {
+    // Use 'use crate::' syntax here implies module is present at root level, 
+    // i.e. the module is included in lib.rs
     use crate::task;
     use crate::skill;
 
