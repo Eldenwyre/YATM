@@ -14,5 +14,9 @@ crate-type = ["cdylib"]
 neon-build = "0.7.1"
 
 [dependencies]
+chrono = { version = "0.4", features = ["serde"] }
 neon = "0.7.1"
 num_cpus = "1.4.0"
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
