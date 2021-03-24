@@ -26,41 +26,43 @@ app.on('ready', function createWindow () {
 });
 
 ipcMain.on("skillclick", (event) => {
-  skills = new BrowserWindow({ parent: win,
-    frame: false,
-    show: false,
-    webPreferences: {
-      nodeIntegration: true 
-    }
-  })
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
   size = win.getSize()
-  skills.setPosition(position[0], position[1]+40)
-  skills.setSize(Math.round(size[0]/3), size[1]-40)
+  skills = new BrowserWindow({ parent: win,
+    frame: false,
+    show: false,
+    x: position[0],
+    y: position[1]+40,
+    width: Math.round(size[0]/3),
+    height: size[1]-40,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true //Required to close the child window
+    }
+  })
   skills.loadFile('skills.html')
   skills.show();
-// inform the render process that the assigned task finished. Show a message in html
-// event.sender.send in ipcMain will return the reply to renderprocess
 });
 
 ipcMain.on("taskclick", (event) => {
+  position = win.getPosition()
+  size = win.getSize()
+  x = Math.round(size[0]*(2/3)) //To set the task menu on the right side of the screen
   tasks = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
+    x: x,
+    y: position[1]+40,
+    width: Math.round(size[0]/3),
+    height: size[1]-40,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true 
     }
   })
-  position = win.getPosition()
-  size = win.getSize()
-  x = Math.round(size[0]*(2/3)) //To set the task menu on the right side of the screen
-  tasks.setPosition(x, position[1]+40)
-  tasks.setSize(Math.round(size[0]/3), size[1]-40)
   tasks.loadFile('tasks.html')
   tasks.show();
-// inform the render process that the assigned task finished. Show a message in html
-// event.sender.send in ipcMain will return the reply to renderprocess
 });
 
 //Closes the skills window and puts the focus back on the main window
