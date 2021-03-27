@@ -3,7 +3,6 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>YATM</title>
 
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
@@ -17,18 +16,22 @@
     <center><h1>TASKS!</center></h1>
 
     <!--Adds a button to close the task menu-->
-    <button id="taskclose" style="float: right;">Close!</button>
+    <div>
+    <button id="taskclose" style="margin-left: 90%; 
+    transform: translate(-50%, 0%);">Close!</button>
+    </div>
+
+    <div class="taskTab">
+        Insert task UI here
+    </div>
+
+    <div class="taskTab">
+        Insert task2 UI here
+    </div>
+
+    <script src="local_modules\rust_core\native\src\skill.rs"></script>
 
   </body>
-
-  <div 
-  style="width: 95%;
-  overflow: auto;
-  border: 4px solid green;
-  text-align: right;
-  ">
-    Insert task UI here
-</div>
 
   <script src="external.js">
     window.$ = window.jquery = require("jquery");
@@ -37,6 +40,16 @@
     require("./renderer.js");
   </script>
   
+  <style>
+    .taskTab{
+      width: 100%;
+      overflow: auto;
+      border: 2px solid green;
+      margin: 5%;
+      margin-left: 0%;
+      padding: 2.5em 0em;
+    }
+  </style>
 </html>
 
 <!--Script to call the main file to close the task menu-->

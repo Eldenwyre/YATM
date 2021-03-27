@@ -3,7 +3,6 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>YATM</title>
 
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
@@ -12,22 +11,27 @@
     
   </head>
 
-  <body style="background: rgb(120, 100, 100);">
+  <body style="background: rgb(240, 200, 200);">
 
     <center><h1>SKILLS!</center></h1>
 
     <!--Adds a button to close the skills menu-->
-    <button id="skillclose" style="float: center;">Close!</button>
+    <div>
+    <button id="skillclose" style="margin-left: 10%; 
+    transform: translate(-50%, 0%);">Close!</button>
+    </div>
+
+    <div class='skillTab'>
+      Insert skill UI here
+    </div>
+
+    <div class='skillTab'>
+      Insert skill2 UI here
+    </div>
+
+    <script src="local_modules\rust_core\native\src\skill.rs"></script>
 
   </body>
-
-  <div 
-    style="width: 95%;
-    overflow: auto;
-    border: 4px solid brown;
-    ">
-      Insert skill UI here
-  </div>
 
   <script src="external.js">
     window.$ = window.jquery = require("jquery");
@@ -36,6 +40,16 @@
     require("./renderer.js");
   </script>
   
+  <style>
+      .skillTab{
+        width: 100%;
+        overflow: auto;
+        border: 2px solid brown;
+        margin: 5%;
+        margin-left: 0%;
+        padding: 2.5em 0em;
+      }
+  </style>
 </html>
 
 <!--Script to call the main file to close the skills menu-->
