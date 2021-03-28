@@ -9,9 +9,9 @@ app.allowRendererProcessReuse = true
 // Function for creating the application window
 app.on('ready', function createWindow () {
   win = new BrowserWindow({
-    frame: false,
-    resizable: false,
-    fullscreen: true,
+    frame: true,
+    resizable: true,
+    fullscreen: false,
     webPreferences: {
       nodeIntegration: true,
     show: false
