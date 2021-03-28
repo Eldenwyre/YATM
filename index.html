@@ -12,12 +12,12 @@
     
   </head>
 
-  <body style="background: rgb(255, 225, 225);">
+  <body style="background: rgb(215, 215, 215);">
 
     <center><h1>Welcome to YATM!</center></h1>
 
     <div class="Character">
-      <img src="test.png" height = "200"/>
+      <img src="images/test.png" height = "200"/>
     </div>
 
     <!--Button to close the program-->
@@ -60,12 +60,12 @@
 
 </html>
 
-<!--Calls a function to open the skills.html file on screen-->
 <script type="text/javascript">
   const ipcRenderer = require('electron').ipcRenderer; 
-  const skillclick = document.getElementById('loadskills');
+  const skillclick = document.getElementById('loadskills'); 
   skillclick.addEventListener('click', function () {
       ipcRenderer.send("skillclick"); // ipcRender.send will pass the information to main process
+      //It will call a function to open the skills.html file on screen
   });
   
   const taskclick = document.getElementById('loadtasks');
@@ -75,7 +75,7 @@
   
   const quit = document.getElementById('exit');
   quit.addEventListener('click', function () {
-    ipcRenderer.send("exit");
+    ipcRenderer.send("exit"); //Calls the main process to close the program
   });
 </script>
 

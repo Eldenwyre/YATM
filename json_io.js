@@ -22,7 +22,7 @@ function saveTasks(data) {
   try {
     // Covert data to Json string
     data = JSON.stringify(data); 
-    // Write Json string to file
+    // Write Json string to filez
     fs.writeFileSync(SAVEFILE, data, 'utf-8');
     console.log("Saved!");
   } catch(err) {

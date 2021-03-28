@@ -18,20 +18,27 @@
     <!--Adds a button to close the skills menu-->
     <div>
     <button id="skillclose" style="margin-left: 10%; 
-    transform: translate(-50%, 0%);">Close!</button>
+    transform: translate(-50%, -50%);">Close!</button>    
+    </div>
+
+    <div>
+      <input type="image" src="images/Add.png" width="25%" style="transform: translate(50%, 0%);">
+      <input type="image" src="images/Remove.png" width="25%" style = "transform: translate(150%, 0%);
+      padding-top: 7%;
+      padding-bottom: 7%;">
     </div>
 
     <!-- This script displays the current skills and information about the skills -->
     <script type="text/javascript">
       var test = ["Skill 1","Skill 2","Skill 3","Skill 4"];
       var levelTest = ["1", "2", "3", "4"];
-      for (i = 0; i < test.length; i++){
+      for (i = 0; i < test.length; i++) {
         var Skill = document.createElement('div');
         var img = document.createElement('img');
         var Name = document.createElement('h3');
         var Level = document.createElement('h1');
         Skill.className = 'skillTab';
-        img.src = "Skill.png"
+        img.src = "images/Skill.png"
         Name.className = 'skillName';
         Name.innerHTML = test[i];
         Level.className = 'skillLevel';
