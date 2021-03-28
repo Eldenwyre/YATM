@@ -1,5 +1,4 @@
 const { app, BrowserWindow } = require('electron')
-import {} from './datastructs';
 
 app.allowRendererProcessReuse = false
 
