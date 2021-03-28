@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-
+const {datastructures} = require('datastructures')
 app.allowRendererProcessReuse = false
 
 // Proof of concept, this is how you would access our rust module in main
