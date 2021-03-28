@@ -21,13 +21,16 @@
     transform: translate(-50%, 0%);">Close!</button>
     </div>
 
-    <div class="taskTab">
-        Insert task UI here
-    </div>
-
-    <div class="taskTab">
-        Insert task2 UI here
-    </div>
+    <script type="text/javascript">
+      var test = ["Task 1","Task 2","Task 3","Task 4"];
+      var temp;
+      for (i = 0; i < test.length; i++){
+        temp = document.createElement('div');
+        temp.className = 'taskTab';
+        temp.innerHTML = test[i];
+        document.getElementsByTagName('body')[0].appendChild(temp);
+      }
+    </script>
 
     <script src="local_modules\rust_core\native\src\skill.rs"></script>
 

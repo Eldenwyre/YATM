@@ -21,15 +21,27 @@
     transform: translate(-50%, 0%);">Close!</button>
     </div>
 
-    <div class='skillTab'>
-      Insert skill UI here
-    </div>
-
-    <div class='skillTab'>
-      Insert skill2 UI here
-    </div>
-
-    <script src="local_modules\rust_core\native\src\skill.rs"></script>
+    <!-- This script displays the current skills and information about the skills -->
+    <script type="text/javascript">
+      var test = ["Skill 1","Skill 2","Skill 3","Skill 4"];
+      var levelTest = ["1", "2", "3", "4"];
+      for (i = 0; i < test.length; i++){
+        var Skill = document.createElement('div');
+        var img = document.createElement('img');
+        var Name = document.createElement('h3');
+        var Level = document.createElement('h1');
+        Skill.className = 'skillTab';
+        img.src = "Skill.png"
+        Name.className = 'skillName';
+        Name.innerHTML = test[i];
+        Level.className = 'skillLevel';
+        Level.innerHTML = levelTest[i];
+        Skill.appendChild(img);
+        Skill.appendChild(Name);
+        Skill.appendChild(Level);
+        document.getElementsByTagName('body')[0].appendChild(Skill);
+      }
+    </script>
 
   </body>
 
@@ -41,13 +53,28 @@
   </script>
   
   <style>
+      /* This style is the parent for the other pieces of information that will appear on every skill */
       .skillTab{
+        position: relative;
         width: 100%;
-        overflow: auto;
-        border: 2px solid brown;
-        margin: 5%;
+        margin-top: 2.5%;
         margin-left: 0%;
-        padding: 2.5em 0em;
+        margin-bottom: 2.5%;
+      }
+
+      /* Style used to make the name of the skill appear in the designated box for names */
+      .skillName{
+        position: absolute;
+        top: 0%;
+        left: 5%;
+      }
+
+      /* Keeps the level for the skill in a specific spot */
+      .skillLevel{
+        position: absolute;
+        color: rgb(0, 15, 120);
+        top: 25%;
+        left: 5%;
       }
   </style>
 </html>
