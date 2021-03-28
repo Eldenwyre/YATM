@@ -30,22 +30,30 @@
 
     <!-- This script displays the current skills and information about the skills -->
     <script type="text/javascript">
-      var test = ["Skill 1","Skill 2","Skill 3","Skill 4"];
+      var test = ["Skill 1",];//"Skill 2","Skill 3","Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8", "Skill 9"];
       var levelTest = ["1", "2", "3", "4"];
+      var experience = "60%";
       for (i = 0; i < test.length; i++) {
         var Skill = document.createElement('div');
         var img = document.createElement('img');
         var Name = document.createElement('h3');
         var Level = document.createElement('h1');
+        var XP = document.createElement('div')
+        var XPProgress = document.createElement('div');
         Skill.className = 'skillTab';
         img.src = "images/Skill.png"
         Name.className = 'skillName';
         Name.innerHTML = test[i];
+        XP.className = 'XP';
+        XPProgress.className = 'XPProgress';
+        XPProgress.style.setProperty("width", experience);
         Level.className = 'skillLevel';
         Level.innerHTML = levelTest[i];
         Skill.appendChild(img);
         Skill.appendChild(Name);
         Skill.appendChild(Level);
+        Skill.appendChild(XP);
+        Skill.appendChild(XPProgress);
         document.getElementsByTagName('body')[0].appendChild(Skill);
       }
     </script>
@@ -82,6 +90,21 @@
         color: rgb(0, 15, 120);
         top: 25%;
         left: 5%;
+      }
+
+      .XP{
+        position: absolute;
+        bottom: 5%;
+        left: 25%;
+        width: 50%;
+        background-color: white;
+      }
+
+      .XPProgress{
+        position: absolute;
+        bottom: 5%;
+        left: 25%;
+        background-color: blue;
       }
   </style>
 </html>
