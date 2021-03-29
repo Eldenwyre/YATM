@@ -23,7 +23,7 @@ window.onload = () => {
     Name.className = 'taskName';
     Name.innerHTML = task.task.title;
     Desc.className = 'taskDesc';
-    Desc.innerHTML = 'No description';
+    Desc.innerHTML = task.task.description;
     Datetime.className = 'taskDate';
     var currentTime = new Date();
     var month = currentTime.getMonth() + 1;
