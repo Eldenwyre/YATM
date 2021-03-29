@@ -4,6 +4,10 @@ let win;
 let skills;
 let tasks;
 
+let skill_button_lock=false; //Locks the skill button when pressed until window is closed.
+let task_button_lock=false; //Locks the task button when pressed until window is closed.
+
+
 app.allowRendererProcessReuse = true
 
 // Function for creating the application window
@@ -28,6 +32,13 @@ app.on('ready', function createWindow () {
 });
 
 ipcMain.on("skillclick", (event) => {
+  //If button lock is activated, return immediately
+  if (skill_button_lock) {
+    return;
+  }
+
+  //Enable skill button lock
+  skill_button_lock = true;
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
   size = win.getSize()
@@ -48,6 +59,12 @@ ipcMain.on("skillclick", (event) => {
 });
 
 ipcMain.on("taskclick", (event) => {
+  //If button lock is activated, return immediately
+  if (task_button_lock) {
+    return;
+  }
+  
+  task_button_lock = true; //Enable task button lock
   position = win.getPosition()
   size = win.getSize()
   x = Math.round(position[0] + size[0]*(7.5/12)) //To set the task menu on the right side of the screen
@@ -71,12 +88,14 @@ ipcMain.on("taskclick", (event) => {
 ipcMain.on("skillclose", (event) => {
   win.show()
   skills.hide()
+  skill_button_lock = false; //Disable the skill button lock
 });
 
 //Closes the tasks window
 ipcMain.on("taskclose", (event) => {
   win.show()
   tasks.hide()
+  task_button_lock = false; //Disable the task button lock
 });
 
 ipcMain.on("exit", (event) => {
