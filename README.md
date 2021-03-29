@@ -6,7 +6,7 @@
 
 ## Node
 
-We need Node.js in order to run `electron`, as well as `neon`, and their associate modules.
+We need Node.js in order to run `electron` and its associated modules.
 
 ### Arch and derivatives
 
@@ -28,15 +28,11 @@ After you have that installed, we will need to install some additional things to
 
 In the root directory of the project, run the following commands to install the needed dependencies:
 
-`$ npm i --save-dev electron jquery typescript @types/node`
-
-- NOTE: If you encounter errors running node modules, you may have to install them globally with the `-g` flag, see below:
-
 `$ sudo npm i -g electron typescript`
 
+`$ npm i --save-dev @types/node`
+
 ## Running
-
-
 
 Once we have all of the dependencies properly installed, we need to compile our Typescript modules down to javascript:
 
