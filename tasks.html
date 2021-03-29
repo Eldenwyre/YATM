@@ -11,11 +11,12 @@
 
   </head>
 
-  <body style="background: rgb(240, 200, 200);">
+  <body style="background: rgb(85, 124, 196);">
 
     <center><h1>TASKS!</center></h1>
 
     <!--Adds a button to close the task menu-->
+<<<<<<< HEAD
     <div>
     <button id="taskclose" style="margin-left: 90%;
     transform: translate(-50%, 0%);">Close!</button>
@@ -26,6 +27,21 @@
       <input type="image" src="images/Remove.png" width="25%" style = "transform: translate(150%, 0%);
       padding-top: 7%;
       padding-bottom: 7%;">
+=======
+    <div class="row">
+      <div class="col-1">
+        <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
+      </div>
+      <div class="col-2">
+        <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
+      </div>
+      <div class="col-9">
+        <div>
+          <button id="taskclose" style="margin-left: 90%;
+            transform: translate(-50%, 0%);">Close!</button>
+        </div>
+      </div>
+>>>>>>> c49b30921a0250a25d2144b3426c2627e3c55b29
     </div>
 
     <script type="text/javascript">
@@ -90,7 +106,7 @@
     .taskTab{
       position: relative;
       width: 100%;
-      margin-top: 2.5%;
+      margin-top: 3%;
       margin-left: 0%;
       margin-bottom: 2.5%;
     }
@@ -98,6 +114,7 @@
     /* Style used to make the Name of the task appear in the designated box for Names */
     .taskName{
       position: absolute;
+      margin-top: 3%;
       top: 0%;
       left: 5%;
       width: 70%
@@ -106,6 +123,7 @@
     /* Keeps the date for the task in a specific spot */
     .taskDate{
       position: absolute;
+      margin-top: 3%;
       top: 0%;
       right: 20%;
     }
@@ -113,6 +131,7 @@
     /* Gives an area to the description */
     .taskDesc{
       position: absolute;
+      margin-top: 3%;
       top: 15%;
       left: 10%;
       width: 70%;
@@ -121,6 +140,7 @@
 
     /* Keeps the reward in a specific spot */
     .taskReward{
+      margin-top: 3%;
       position: absolute;
       top: 60%;
       left: 5%;
@@ -128,6 +148,7 @@
 
     /* Keeps the subtasks in a specific spot */
     .taskSub{
+      margin-top: 3%;
       position: absolute;
       top: 50%;
       left: 20%;
