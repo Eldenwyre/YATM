@@ -24,7 +24,8 @@
     "jquery": "^3.5.1"
   },
   "dependencies": {
-    "datastructures": "^0.0.1",
+    "bootstrap": "^5.0.0-beta3",
+    "datastructures": "file:datastructures",
     "electron-squirrel-startup": "^1.0.0",
     "typescript": "^4.2.3"
   }

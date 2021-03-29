@@ -1,0 +1,8 @@
+{
+    "name": "datastructures",
+    "version": "1.0.0",
+    "description": "Yet Another Task Manager DataStructures",
+    "devDependencies": {
+        "lodash" : "^4.17.10"
+      }
+}

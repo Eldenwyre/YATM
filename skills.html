@@ -6,26 +6,33 @@
 
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
-    
+
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    
+
   </head>
 
-  <body style="background: rgb(240, 200, 200);">
+  <body style="background: rgb(85, 124, 196);">
 
     <center><h1>SKILLS!</center></h1>
 
     <!--Adds a button to close the skills menu-->
-    <div>
-    <button id="skillclose" style="margin-left: 10%; 
-    transform: translate(-50%, -50%);">Close!</button>    
-    </div>
 
-    <div>
-      <input type="image" src="images/Add.png" width="25%" style="transform: translate(50%, 0%);">
-      <input type="image" src="images/Remove.png" width="25%" style = "transform: translate(150%, 0%);
-      padding-top: 7%;
-      padding-bottom: 7%;">
+    <div class="row">
+      <div class="col-2">
+        <div>
+          <button id="skillclose" style="margin-left: 90%;
+            transform: translate(-50%, 0%);">Close!</button>
+        </div>
+      </div>
+      <div class="col-7">
+        <!--Nothing to see here-->
+      </div>
+      <div class="col-1">
+        <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
+      </div>
+      <div class="col-1">
+        <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
+      </div>
     </div>
 
     <!-- This script displays the current skills and information about the skills -->
@@ -66,7 +73,7 @@
     require("bootstrap");
     require("./renderer.js");
   </script>
-  
+
   <style>
       /* This style is the parent for the other pieces of information that will appear on every skill */
       .skillTab{
@@ -79,6 +86,7 @@
 
       /* Style used to make the name of the skill appear in the designated box for names */
       .skillName{
+        margin-top: 3%;
         position: absolute;
         top: 0%;
         left: 5%;
@@ -111,10 +119,15 @@
 
 <!--Script to call the main file to close the skills menu-->
 <script type="text/javascript">
-  const ipcRenderer = require('electron').ipcRenderer; 
+  const ipcRenderer = require('electron').ipcRenderer;
   const skillclose = document.getElementById('skillclose');
   skillclose.addEventListener('click', function () {
       ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
+  });
+
+  const add = document.getElementById('addskill');
+  add.addEventListener('click', function () {
+    ipcRenderer.send("addskill"); //Calls the main process to close the program
   });
 </script>
 
