@@ -1,15 +1,10 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
-const { Character, Skill, SortStatus, RepeatableTask } = require('datastructures')
 let win;
 let skills;
 let tasks;
 
 let skill_button_lock=false; //Locks the skill button when pressed until window is closed.
 let task_button_lock=false; //Locks the task button when pressed until window is closed.
-
-//Check for save file, else load default TODO
-let character = new Character("Astolpho", 1337, [],[]);
-
 
 app.allowRendererProcessReuse = true
 
