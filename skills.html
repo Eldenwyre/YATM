@@ -6,18 +6,18 @@
 
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
-
+    
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+    
   </head>
 
   <body style="background: rgb(85, 124, 196);">
 
     <center><h1>SKILLS!</center></h1>
 
-    <!--Adds a button to close the skills menu-->
+     <!--Adds a button to close the skills menu-->
 
-    <div class="row">
+     <div class="row">
       <div class="col-2">
         <div>
           <button id="skillclose" style="margin-left: 90%;
@@ -37,30 +37,30 @@
 
     <!-- This script displays the current skills and information about the skills -->
     <script type="text/javascript">
-      var test = ["Skill 1",];//"Skill 2","Skill 3","Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8", "Skill 9"];
+      var test = ["Skill 1","Skill 2","Skill 3","Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8", "Skill 9"];
       var levelTest = ["1", "2", "3", "4"];
-      var experience = "60%";
+      var experience = '60'; //Current experience percentage to next level
+      var maximum = '100'; //Value to reach the next level
       for (i = 0; i < test.length; i++) {
         var Skill = document.createElement('div');
         var img = document.createElement('img');
         var Name = document.createElement('h3');
         var Level = document.createElement('h1');
-        var XP = document.createElement('div')
-        var XPProgress = document.createElement('div');
+        var XP = document.createElement('progress')
+        
         Skill.className = 'skillTab';
         img.src = "images/Skill.png"
         Name.className = 'skillName';
         Name.innerHTML = test[i];
-        XP.className = 'XP';
-        XPProgress.className = 'XPProgress';
-        XPProgress.style.setProperty("width", experience);
+        XP.className = 'Xp';
+        XP.max = maximum;
+        XP.value = experience;
         Level.className = 'skillLevel';
         Level.innerHTML = levelTest[i];
         Skill.appendChild(img);
         Skill.appendChild(Name);
         Skill.appendChild(Level);
         Skill.appendChild(XP);
-        Skill.appendChild(XPProgress);
         document.getElementsByTagName('body')[0].appendChild(Skill);
       }
     </script>
@@ -73,7 +73,7 @@
     require("bootstrap");
     require("./renderer.js");
   </script>
-
+  
   <style>
       /* This style is the parent for the other pieces of information that will appear on every skill */
       .skillTab{
@@ -86,7 +86,6 @@
 
       /* Style used to make the name of the skill appear in the designated box for names */
       .skillName{
-        margin-top: 3%;
         position: absolute;
         top: 0%;
         left: 5%;
@@ -100,34 +99,34 @@
         left: 5%;
       }
 
-      .XP{
+      /* Progress bar for each skill's experience */
+      .Xp{
+        -webkit-appearance: none;
         position: absolute;
         bottom: 5%;
         left: 25%;
-        width: 50%;
-        background-color: white;
+        width: 65%;
       }
 
-      .XPProgress{
-        position: absolute;
-        bottom: 5%;
-        left: 25%;
-        background-color: blue;
+      .Xp::-webkit-progress-bar{
+        background: whitesmoke;
+        border-radius: 10px;
       }
+
+      .Xp::-webkit-progress-value{
+        background: blue;
+        border-radius: 10px;
+      }
+      
   </style>
 </html>
 
 <!--Script to call the main file to close the skills menu-->
 <script type="text/javascript">
-  const ipcRenderer = require('electron').ipcRenderer;
+  const ipcRenderer = require('electron').ipcRenderer; 
   const skillclose = document.getElementById('skillclose');
   skillclose.addEventListener('click', function () {
       ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
-  });
-
-  const add = document.getElementById('addskill');
-  add.addEventListener('click', function () {
-    ipcRenderer.send("addskill"); //Calls the main process to close the program
   });
 </script>
 
