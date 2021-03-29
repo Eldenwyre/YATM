@@ -11,21 +11,24 @@
     
   </head>
 
-  <body style="background: rgb(240, 200, 200);">
+  <body style="background: rgb(85, 124, 196);">
 
     <center><h1>SKILLS!</center></h1>
 
     <!--Adds a button to close the skills menu-->
-    <div>
-    <button id="skillclose" style="margin-left: 10%; 
-    transform: translate(-50%, -50%);">Close!</button>    
-    </div>
-
-    <div>
-      <input type="image" src="images/Add.png" width="25%" style="transform: translate(50%, 0%);">
-      <input type="image" src="images/Remove.png" width="25%" style = "transform: translate(150%, 0%);
-      padding-top: 7%;
-      padding-bottom: 7%;">
+    <div class="row">
+      <div class="col-1">
+        <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
+      </div>
+      <div class="col-2">
+        <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
+      </div>
+      <div class="col-9">
+        <div>
+          <button id="skillclose" style="margin-left: 90%;
+            transform: translate(-50%, 0%);">Close!</button>
+        </div>
+      </div>
     </div>
 
     <!-- This script displays the current skills and information about the skills -->

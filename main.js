@@ -12,6 +12,8 @@ app.on('ready', function createWindow () {
     frame: true,
     resizable: true,
     fullscreen: false,
+    width: 1280,
+    height: 720,
     webPreferences: {
       nodeIntegration: true,
     show: false
@@ -33,9 +35,9 @@ ipcMain.on("skillclick", (event) => {
     frame: false,
     show: false,
     x: position[0],
-    y: position[1]+40,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    y: position[1],
+    width: Math.round(size[0]/12*4.5),
+    height: size[1],
     resizable: false,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
@@ -48,14 +50,14 @@ ipcMain.on("skillclick", (event) => {
 ipcMain.on("taskclick", (event) => {
   position = win.getPosition()
   size = win.getSize()
-  x = Math.round(size[0]*(2/3)) //To set the task menu on the right side of the screen
+  x = Math.round(position[0] + size[0]*(7.5/12)) //To set the task menu on the right side of the screen
   tasks = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
     x: x,
-    y: position[1]+40,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    y: position[1],
+    width: Math.round(size[0]/12*4.5),
+    height: size[1],
     resizable: false,
     webPreferences: {
       nodeIntegration: true 
