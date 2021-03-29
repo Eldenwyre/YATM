@@ -1,0 +1,60 @@
+
+<form>
+  <h1>Task form</h1>
+  <body>
+    <div>
+      <input type="button" name="cancelvalue" value="CANCEL"
+      onClick="open(location, '_self').close();">
+    </div>
+  </body>
+  <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+  <section>
+    <p>
+      <label for="name">
+        <span>Name: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="text" id="name" name="taskname">
+    </p>
+    <p>
+      <label for="desc">
+        <span>Description: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="text" id="level" name="tasklevel">
+    </p>
+    <p>
+      <label for="your_date">
+        <span>Date: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="date" id="your_date" name="taskdate">
+    </p>
+    <p>
+      <label for="reward">
+        <span>Reward: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="text" id="reward" name="taskreward">
+    </p>
+    <p>
+      <label for="incre">
+        <span>Repeating Increments: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="text" id="incre" name="taskincrements">
+    </p>
+    <p>
+      <label for="num">
+        <span>Number of Repeats: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="int" id="num" name="tasknum">
+    </p>
+  </section>
+  <section>
+    <p>
+      <button type="submit" value="Send">Add the Task</button>
+    </p>
+  </section>
+</form>

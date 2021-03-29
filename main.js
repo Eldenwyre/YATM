@@ -56,6 +56,30 @@ ipcMain.on("skillclick", (event) => {
   skills.show();
 });
 
+ipcMain.on("addskill", (event) => {
+  position = win.getPosition() //Skill menu is set to take up the left third of the window
+  //and will do so by checking the window
+  size = win.getSize()
+  addskills = new BrowserWindow({ parent: win,
+    frame: false,
+    show: false,
+    width: Math.round(size[0]/3),
+    height: size[1]-40,
+    resizable: true,
+    webPreferences: {
+      nodeIntegration: true //Required to close the child window
+    }
+  })
+  addskills.loadFile('skillForm.html')
+  addskills.show();
+});
+
+ipcMain.on("addskillclose", (event) => {
+  win.show()
+  addskills.hide()
+  skills.show();
+});
+
 ipcMain.on("taskclick", (event) => {
   //If button lock is activated, return immediately
   if (task_button_lock) {
@@ -75,10 +99,34 @@ ipcMain.on("taskclick", (event) => {
     height: size[1],
     resizable: false,
     webPreferences: {
-      nodeIntegration: true 
+      nodeIntegration: true
     }
   })
   tasks.loadFile('tasks.html')
+  tasks.show();
+});
+
+ipcMain.on("addtask", (event) => {
+  position = win.getPosition() //Skill menu is set to take up the left third of the window
+  //and will do so by checking the window
+  size = win.getSize()
+  addtasks = new BrowserWindow({ parent: win,
+    frame: false,
+    show: false,
+    width: Math.round(size[0]/3),
+    height: size[1]-40,
+    resizable: true,
+    webPreferences: {
+      nodeIntegration: true //Required to close the child window
+    }
+  })
+  addtasks.loadFile('taskForm.html')
+  addtasks.show();
+});
+
+ipcMain.on("addtaskclose", (event) => {
+  win.show()
+  addtasks.hide()
   tasks.show();
 });
 
@@ -106,4 +154,3 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 });
-

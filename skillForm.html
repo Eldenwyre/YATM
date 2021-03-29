@@ -1,0 +1,39 @@
+
+<form>
+  <h1>Skill form</h1>
+  <body>
+    <div>
+      <input type="button" name="cancelvalue" value="CANCEL"
+      onClick="open(location, '_self').close();"> 
+    </div>
+  </body>
+  <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+  <section>
+    <p>
+      <label for="name">
+        <span>Name: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="text" id="name" name="skillname">
+    </p>
+    <p>
+      <label for="level">
+        <span>Level: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="int" id="level" name="skilllevel">
+    </p>
+    <p>
+      <label for="xp">
+        <span>Experience Points: </span>
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <input type="int" id="xp" name="skillxp">
+    </p>
+  </section>
+  <section>
+    <p>
+      <button type="submit" value="Send">Add the Skill</button>
+    </p>
+  </section>
+</form>

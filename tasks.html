@@ -16,6 +16,18 @@
     <center><h1>TASKS!</center></h1>
 
     <!--Adds a button to close the task menu-->
+<<<<<<< HEAD
+    <div>
+    <button id="taskclose" style="margin-left: 90%;
+    transform: translate(-50%, 0%);">Close!</button>
+    </div>
+
+    <div>
+      <input type="image" id="addtask" src="images/Add.png" width="25%" style="transform: translate(50%, 0%);">
+      <input type="image" src="images/Remove.png" width="25%" style = "transform: translate(150%, 0%);
+      padding-top: 7%;
+      padding-bottom: 7%;">
+=======
     <div class="row">
       <div class="col-1">
         <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
@@ -29,6 +41,7 @@
             transform: translate(-50%, 0%);">Close!</button>
         </div>
       </div>
+>>>>>>> c49b30921a0250a25d2144b3426c2627e3c55b29
     </div>
 
     <script type="text/javascript">
@@ -164,6 +177,11 @@
   const taskclose = document.getElementById('taskclose');
   taskclose.addEventListener('click', function () {
       ipcRenderer.send("taskclose"); // ipcRender.send will pass the information to main process
+  });
+
+  const add = document.getElementById('addtask');
+  add.addEventListener('click', function () {
+    ipcRenderer.send("addtask"); //Calls the main process to close the program
   });
 </script>
 
