@@ -1,5 +1,6 @@
 import { RepeatableTask } from './tasks'
 import { Skill, SortStatus } from './skills'
+import { saveData } from '../json_io'
 const lodash = require('lodash');
 
 export class Character {
@@ -106,5 +107,9 @@ export class Character {
         this.sortSkills();
 
         return;
+    }
+
+    public save() {
+      saveData(this);
     }
 }

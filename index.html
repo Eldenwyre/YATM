@@ -9,6 +9,7 @@
          the values of the below elements-->
     
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script> require('./external.js');</script>
     
   </head>
 
@@ -30,7 +31,7 @@
   <button id="loadskills" style="float: left;">Skills</button>
   <button id="loadtasks" style="float: right;">Tasks</button>
 
-  <script src="external.js">
+  <script>
     window.$ = window.jquery = require("jquery");
     window.popper = require("popper.js");
     require("bootstrap");
