@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
-    "datastructures": "^0.0.1",
+    "datastructures": "file:datastructures",
     "electron-squirrel-startup": "^1.0.0",
     "typescript": "^4.2.3"
   }
