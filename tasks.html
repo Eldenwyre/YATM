@@ -31,54 +31,7 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-      var test = ["Task 1","Task 2","Task 3","Task 4"];
-      var increTest = ["Daily","Weekly","Biweekly","Monthly"];
-      var repeatsTest = ["Once","Twice","Three times","Four times"];
-      for (i = 0; i < test.length; i++){
-        var Task = document.createElement('div');
-        var img = document.createElement('img');
-        var Name = document.createElement('h3');
-        var Desc = document.createElement('p');
-        var Datetime = document.createElement('h3');
-        var Subtasks = document.createElement('div');
-        var Reward = document.createElement('h3');
-        var Repeat_increment = document.createElement('div');
-        var Num_repeats = document.createElement('div');
-        Task.className = 'taskTab';
-
-        // Temporary use of the skill image as the background
-        img.src = "images/Skill.png"
-        Name.className = 'taskName';
-        Name.innerHTML = test[i];
-        Desc.className = 'taskDesc';
-        Desc.innerHTML = 'No description';
-        Datetime.className = 'taskDate';
-        var currentTime = new Date();
-        var month = currentTime.getMonth() + 1;
-        var day = currentTime.getDate();
-        var year = currentTime.getFullYear();
-        Datetime.innerHTML = month + "/" + day + "/" + year;
-
-        // Add more to subtasks in the future
-        Subtasks.className = 'taskSub';
-        Reward.className = 'taskReward';
-        Reward.innerHTML = 'Reward';
-        Repeat_increment.className = 'taskInc';
-        Repeat_increment.innerHTML = increTest[i];
-        Num_repeats.className = 'taskRep';
-        Num_repeats.innerHTML = repeatsTest[i];
-        Task.appendChild(img);
-        Task.appendChild(Name);
-        Task.appendChild(Desc);
-        Task.appendChild(Datetime);
-        Task.appendChild(Subtasks);
-        Task.appendChild(Reward);
-        Task.appendChild(Repeat_increment);
-        Task.appendChild(Num_repeats);
-        document.getElementsByTagName('body')[0].appendChild(Task);
-      }
-    </script>
+    <script>require('./tasks.js')</script>
 
   </body>
 
