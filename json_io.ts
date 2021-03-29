@@ -32,8 +32,7 @@ export function saveData(data, file: string = SAVEFILE) {
   }
 }
 
-export function characterFromFile(file: string = SAVEFILE) {
-  var data = getData(file);
+export function characterFromObj(data) {
   var char: Character = new Character(data.name, 
                                       data.experience,
                                       lodash.cloneDeep(data.tasks),
