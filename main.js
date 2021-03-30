@@ -5,6 +5,8 @@ let tasks;
 
 let skill_button_lock=false; //Locks the skill button when pressed until window is closed.
 let task_button_lock=false; //Locks the task button when pressed until window is closed.
+let add_skill_lock = false; //Locks the add skill button when pressed until window is closed.
+let add_task_lock = false; //Locks the add task button when pressed until window is closed.
 
 app.allowRendererProcessReuse = true
 
@@ -57,6 +59,13 @@ ipcMain.on("skillclick", (event) => {
 });
 
 ipcMain.on("addskill", (event) => {
+  //if skill is locked, return, else lock and continue
+  if (add_skill_lock) {
+    return;
+  }
+  //Lock add skill button when pressed until window is closed.
+  add_skill_lock = true; //
+
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
   size = win.getSize()
@@ -74,10 +83,11 @@ ipcMain.on("addskill", (event) => {
   addskills.show();
 });
 
-ipcMain.on("addskillclose", (event) => {
+ipcMain.on("addSkillClose", (event) => {
   win.show()
   addskills.hide()
   skills.show();
+  add_skill_lock = false; //Disable add skill lock
 });
 
 ipcMain.on("taskclick", (event) => {
@@ -106,7 +116,13 @@ ipcMain.on("taskclick", (event) => {
   tasks.show();
 });
 
-ipcMain.on("addtask", (event) => {
+ipcMain.on("addTaskWindow", (event) => {
+  //Return if locked, otherwise continue
+  if (add_task_lock) {
+    return;
+  }
+  //Locking the button
+  add_task_lock = true; //
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
   size = win.getSize()
@@ -124,10 +140,19 @@ ipcMain.on("addtask", (event) => {
   addtasks.show();
 });
 
-ipcMain.on("addtaskclose", (event) => {
-  win.show()
-  addtasks.hide()
+ipcMain.on("addTaskClose", (event) => {
+  win.show();
+  addtasks.hide();
   tasks.show();
+  add_task_lock = false; // Dsiable add task lock
+});
+
+ipcMain.on("addTaskInformation", (event, _task_data) => {
+  console.log("Test", _task_data);
+});
+
+ipcMain.on("addSkillInformation", (event, _skill_data) => {
+  console.log("Test", _skill_data);
 });
 
 //Closes the skills window and puts the focus back on the main window

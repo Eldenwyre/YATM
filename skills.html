@@ -28,7 +28,7 @@
         <!--Nothing to see here-->
       </div>
       <div class="col-1">
-        <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
+        <input type="image" src="images/Add.png" name="addskill" id="addskill" width="25px" style="transform: translate(50%, 0%);">
       </div>
       <div class="col-1">
         <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
@@ -101,6 +101,11 @@
   const skillclose = document.getElementById('skillclose');
   skillclose.addEventListener('click', function () {
       ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
+  });
+
+  const skilladd = document.getElementById('addskill');
+  skilladd.addEventListener('click', function () {
+    ipcRenderer.send("addskill"); //Calls the main process to close the program
   });
 </script>
 

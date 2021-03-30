@@ -1,39 +1,77 @@
 
-<form>
-  <h1>Skill form</h1>
-  <body>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- Source our external script, which will allow us to change
+         the values of the below elements-->
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  </head>
+
+  <body style="background: rgb(180, 230, 180);">
+    <div>  
+      <form>
+        <center><u><h1>Add Some Skills</h1></u></center>
+        <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+        <section>
+          <p>
+            <label for="skill_name">
+              <span>Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="skill_name" name="skill_name">
+          </p>
+          <p>
+            <label for="skill_description">
+              <span>Description: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="skill_description" name="skill_description">
+          </p>
+          <p>
+            <label for="skill_xp">
+              <span>Experience: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="int" id="skill_xp" name="skill_xp">
+          </p>
+        </section>
+        <section>
+          <p>
+            <input class="button" name="submit" type="submit" value="submit" onclick="sendSkillForm()" />
+          </p>
+        </section>
+      </form>
+    </div>
     <div>
-      <input type="button" name="cancelvalue" value="CANCEL"
-      onClick="open(location, '_self').close();"> 
+      <button id="addSkillClose">Close Add Skill Menu</button>
     </div>
   </body>
-  <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
-  <section>
-    <p>
-      <label for="name">
-        <span>Name: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="name" name="skillname">
-    </p>
-    <p>
-      <label for="level">
-        <span>Level: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="int" id="level" name="skilllevel">
-    </p>
-    <p>
-      <label for="xp">
-        <span>Experience Points: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="int" id="xp" name="skillxp">
-    </p>
-  </section>
-  <section>
-    <p>
-      <button type="submit" value="Send">Add the Skill</button>
-    </p>
-  </section>
-</form>
+</html>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<!--Script to call the main file to close the add skill menu and handle passing info-->
+<script type="text/javascript">
+  const ipcRenderer = require('electron').ipcRenderer;
+  const addSkillClose = document.getElementById("addSkillClose");
+  addSkillClose.addEventListener('click', function () {
+      ipcRenderer.send("addSkillClose"); // ipcRender.send will pass the information to main process
+  });
+
+
+  function sendSkillForm(){
+    //Get the values
+    
+    var _skill_data = {
+      skill_name : document.getElementById("skill_name").value,
+      skill_description : document.getElementById("skill_description").value,
+      skill_xp : document.getElementById("skill_xp").value,
+    }
+    ipcRenderer.send("addSkillInformation", _skill_data);
+    };
+</script>

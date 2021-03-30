@@ -1,60 +1,103 @@
 
-<form>
-  <h1>Task form</h1>
-  <body>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- Source our external script, which will allow us to change
+         the values of the below elements-->
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  </head>
+
+  <body style="background: rgb(180, 230, 180);">
+    <div>  
+      <form id="taskForm" ><!--onSubmit="JavaScript:sendTaskForm(event)">-->
+        <center><u><h1>Add a Task</h1></u></center>
+        <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
+        <section>
+          <p>
+            <label for="task_name">
+              <span>Name: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="task_name" name="taskname">
+          </p>
+          <p>
+            <label for="task_desc">
+              <span>Description: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="task_desc" name="tasklevel">
+          </p>
+          <p>
+            <label for="task_date">
+              <span>Date: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="date" id="task_date" name="taskdate">
+          </p>
+          <p>
+            <label for="task_reward">
+              <span>Reward: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="task_reward" name="taskreward">
+          </p>
+          <p>
+            <!--TODO Make this a dropdown for selections later, acceptable for MVP ALSO, make subtasks and whatnot-->
+            <label for="task_inc">
+              <span>Repeating Increments: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="int" id="task_inc" name="taskincrements">
+          </p>
+          <p>
+            <label for="task_max_repeats">
+              <span>Number of Repeats: </span>
+              <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="int" id="task_max_repeats" name="tasknum">
+          </p>
+        </section>
+        <section>
+          <p>
+            <input class="button" name="submit" type="submit" value="submit" onclick="sendTaskForm()" />
+          </p>
+        </section>
+      </form>
+    </div>
     <div>
-      <input type="button" name="cancelvalue" value="CANCEL"
-      onClick="open(location, '_self').close();">
+      <button id="addTaskClose">Close Add Task Menu</button>
     </div>
   </body>
-  <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
-  <section>
-    <p>
-      <label for="name">
-        <span>Name: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="name" name="taskname">
-    </p>
-    <p>
-      <label for="desc">
-        <span>Description: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="level" name="tasklevel">
-    </p>
-    <p>
-      <label for="your_date">
-        <span>Date: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="date" id="your_date" name="taskdate">
-    </p>
-    <p>
-      <label for="reward">
-        <span>Reward: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="reward" name="taskreward">
-    </p>
-    <p>
-      <label for="incre">
-        <span>Repeating Increments: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="incre" name="taskincrements">
-    </p>
-    <p>
-      <label for="num">
-        <span>Number of Repeats: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="int" id="num" name="tasknum">
-    </p>
-  </section>
-  <section>
-    <p>
-      <button type="submit" value="Send">Add the Task</button>
-    </p>
-  </section>
-</form>
+</html>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<!--Script to call the main file to close the add task menu and handle passing info-->
+<script type="text/javascript">
+  const ipcRenderer = require('electron').ipcRenderer;
+  const addTaskClose = document.getElementById("addTaskClose");
+  addTaskClose.addEventListener('click', function () {
+      ipcRenderer.send("addTaskClose"); // ipcRender.send will pass the information to main process
+  });
+
+
+  function sendTaskForm(event){
+    //Get the values
+    
+    var _task_data = {
+      task_name : document.getElementById("task_name").value,
+      task_desc : document.getElementById("task_desc").value,
+      task_date : document.getElementById("task_date").value,
+      task_reward : document.getElementById("task_reward").value,
+      task_inc : document.getElementById("task_inc").value,
+      task_max_repeats : document.getElementById("task_max_repeats").value
+    }
+    ipcRenderer.send("addTaskInformation", _task_data);
+    };
+</script>
+

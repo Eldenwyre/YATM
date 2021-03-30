@@ -18,7 +18,7 @@
     <!--Adds a button to close the task menu-->
     <div class="row">
       <div class="col-1">
-        <input type="image" src="images/Add.png" width="25px" style="transform: translate(50%, 0%);">
+        <input type="image" src="images/Add.png" name="addTaskWindow" id="addTaskWindow" width="25px" style="transform: translate(50%, 0%);">
       </div>
       <div class="col-2">
         <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
@@ -119,9 +119,9 @@
       ipcRenderer.send("taskclose"); // ipcRender.send will pass the information to main process
   });
 
-  const add = document.getElementById('addtask');
+  const add = document.getElementById('addTaskWindow');
   add.addEventListener('click', function () {
-    ipcRenderer.send("addtask"); //Calls the main process to close the program
+    ipcRenderer.send("addTaskWindow"); //Calls the main process to close the program
   });
 </script>
 
