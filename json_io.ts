@@ -1,6 +1,8 @@
 const fs = require('fs');
 const lodash = require('lodash');
 import { Character } from './datastructures/char.js';
+import { RepeatableTask } from './datastructures/tasks.js'
+import { Skill } from './datastructures/skills.js'
 
 // NOTE: Using synchronous operations on the files,
 // not a lot of data so it will mainly prevent read/write 
@@ -32,13 +34,12 @@ export function saveData(data, file: string = SAVEFILE) {
   }
 }
 
-export function characterFromFile(file: string = SAVEFILE) {
-  var data = getData(file);
+export function characterFromObj(data) {
   var char: Character = new Character(data.name, 
                                       data.experience,
                                       lodash.cloneDeep(data.tasks),
-                                      lodash.cloneDeep(data.task_sort_status),
                                       lodash.cloneDeep(data.skills),
+                                      lodash.cloneDeep(data.task_sort_status),
                                       lodash.cloneDeep(data.skill_sort_status),
   );
   return char;
