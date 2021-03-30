@@ -36,9 +36,9 @@ window.onload = () => {
     Reward.className = 'taskReward';
     Reward.innerHTML = 'Reward';
     Repeat_increment.className = 'taskInc';
-    Repeat_increment.innerHTML = task.repeat_increment;
+    Repeat_increment.innerHTML = task.repeat_increment.toString();
     Num_repeats.className = 'taskRep';
-    Num_repeats.innerHTML = task.num_repeats;
+    Num_repeats.innerHTML = task.num_repeats.toString();
     Task.appendChild(img);
     Task.appendChild(Name);
     Task.appendChild(Desc);
