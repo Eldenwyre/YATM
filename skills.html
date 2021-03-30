@@ -36,34 +36,7 @@
     </div>
 
     <!-- This script displays the current skills and information about the skills -->
-    <script type="text/javascript">
-      var test = ["Skill 1","Skill 2","Skill 3","Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8", "Skill 9"];
-      var levelTest = ["1", "2", "3", "4"];
-      var experience = '60'; //Current experience percentage to next level
-      var maximum = '100'; //Value to reach the next level
-      for (i = 0; i < test.length; i++) {
-        var Skill = document.createElement('div');
-        var img = document.createElement('img');
-        var Name = document.createElement('h3');
-        var Level = document.createElement('h1');
-        var XP = document.createElement('progress')
-        
-        Skill.className = 'skillTab';
-        img.src = "images/Skill.png"
-        Name.className = 'skillName';
-        Name.innerHTML = test[i];
-        XP.className = 'Xp';
-        XP.max = maximum;
-        XP.value = experience;
-        Level.className = 'skillLevel';
-        Level.innerHTML = levelTest[i];
-        Skill.appendChild(img);
-        Skill.appendChild(Name);
-        Skill.appendChild(Level);
-        Skill.appendChild(XP);
-        document.getElementsByTagName('body')[0].appendChild(Skill);
-      }
-    </script>
+    <script>require('./skills.js');</script>
 
   </body>
 
