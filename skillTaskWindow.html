@@ -5,22 +5,22 @@
         <meta charset="UTF-8">
 
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styling-tools.css">   
+        <link rel="stylesheet" href="styling-tools.css">
     </head>
 
-    
+
     <body style="background: rgb(104, 80, 170);">
         <div class="disable-horizontal-scroll">
             <div class="row">
-                <center><h2><u><a id="skillName"></a></u></h2></center>
+                <center><h2><u><a id="skillName" style="font-weight: bold;"></a></u></h2></center>
                 <p class="text-left" ><a id="skillDesc"></a></div>
-            
+
             <div class="d-flex justify-content-start" id="taskList">
 
             </div>
-            
+
             <div class="row footer">
-                <button type="button" id="butCloseSkillTask">Close</button>
+                <button type="button" id="butCloseSkillTask" style="background: rgb(85, 124, 196);">Close</button>
             </div>
         </div>
     </body>
@@ -32,7 +32,7 @@
 
 <!--Script to call the main file to close the skills menu-->
 <script type="text/javascript">
-    const ipcRenderer = require('electron').ipcRenderer; 
+    const ipcRenderer = require('electron').ipcRenderer;
 
     //Call to close the window on user click
     const butCloseSkillTask = document.getElementById('butCloseSkillTask');
@@ -87,4 +87,3 @@
         }
     });
 </script>
-  
