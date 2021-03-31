@@ -11,9 +11,13 @@ const lodash = require("lodash");
 var data = json_io_js_1.getData();
 var character = json_io_js_1.characterFromObj(data);
 
-let win;
-let skills;
-let tasks;
+
+//Window objects
+let win; // Main window
+let skills; // Skills Tab
+let tasks; // Tasks Tab
+let skillTasks; //Skill task tab
+var selectedSkill;
 
 let skill_button_lock=false; //Locks the skill button when pressed until window is closed.
 let task_button_lock=false; //Locks the task button when pressed until window is closed.
@@ -204,6 +208,43 @@ ipcMain.on("taskclose", (event) => {
   win.show()
   tasks.hide()
   task_button_lock = false; //Disable the task button lock
+});
+
+//Specific Skill Window
+ipcMain.on("openSkillTaskWindow", (event, arg) => {
+  skillTasks = new BrowserWindow(
+    { 
+      parent: win,
+      frame: false,
+      show: false,
+      width: Math.round(size[0]/12*4.5),
+      height: size[1]-40,
+      resizable: false,
+      webPreferences: {
+        nodeIntegration: true //Required to close the child window
+      }
+    });
+    selectedSkill = arg; //REVIEW
+    skillTasks.loadFile('skillTaskWindow.html');
+    skillTasks.show();
+});
+
+ipcMain.on("closeSkillTaskWindow", (event) => {
+  skillTasks.hide();
+});
+
+ipcMain.on("getSelectedSkill", (event) => {
+  event.sender.send("recieveSelectedSkill",selectedSkill);
+});
+
+ipcMain.on("test", (event,args) => {
+  console.log("test");
+  console.log(args)
+});
+
+ipcMain.on("getSelectedSkillInfo", (event) => {
+  var sk = character.skills.find(skill => skill.title === selectedSkill);
+  event.sender.send("recieveSelectedSkillInfo", sk)
 });
 
 ipcMain.on("exit", (event) => {
