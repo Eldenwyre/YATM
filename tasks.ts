@@ -31,7 +31,7 @@ window.onload = () => {
     // Add more to subtasks in the future
     Subtasks.className = 'taskSub';
     Reward.className = 'taskReward';
-    Reward.innerHTML = 'Reward';
+    Reward.innerHTML = 'Reward: ' + task.task.reward.toString();
     Repeat_increment.className = 'taskInc';
     Repeat_increment.innerHTML = task.repeat_increment.toString();
     Num_repeats.className = 'taskRep';

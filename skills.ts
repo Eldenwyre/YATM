@@ -1,5 +1,6 @@
 import { Character } from './datastructures/char.js';
 import { getData, characterFromObj } from './json_io.js';
+import {ipcRenderer} from 'electron';
 
 var data = getData();
 var character = characterFromObj(data);
@@ -16,6 +17,7 @@ window.onload = () => {
     var XP = document.createElement('progress')
     
     Skill.className = 'skillTab';
+    Skill.id = skill.title; //FIXME Figure some other method that's better
     img.src = "images/Skill.png"
     Name.className = 'skillName';
     Name.innerHTML = skill.title;
@@ -28,6 +30,15 @@ window.onload = () => {
     Skill.appendChild(Name);
     Skill.appendChild(Level);
     Skill.appendChild(XP);
+    var elem = document.createElement('input');
+    elem.type = 'button';
+    elem.value = 'Open ' + skill.title + ' menu';
+    elem.id = skill.title; //FIXME Figure some other method another time? Works for now...
+    elem.className = "skillButton"
+    Skill.appendChild(elem);
+    elem.addEventListener('click', function () {
+      ipcRenderer.send("openSkillTaskWindow", this.parentElement.id); // ipcRender.send will pass the information to main process
+    });
     document.getElementsByTagName('body')[0].appendChild(Skill);
   }
 }
