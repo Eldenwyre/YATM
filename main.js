@@ -107,7 +107,7 @@ ipcMain.on("taskclick", (event) => {
   if (task_button_lock) {
     return;
   }
-  
+
   task_button_lock = true; //Enable task button lock
   position = win.getPosition()
   size = win.getSize()
@@ -177,7 +177,7 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
                     parseInt(_task_data.task_inc),
                     parseInt(_task_data.task_max_repeats)));
-  
+
   json_io_js_1.saveData(character, "./saves/character.json");
   tasks.reload();
 });
@@ -204,6 +204,12 @@ ipcMain.on("taskclose", (event) => {
   win.show()
   tasks.hide()
   task_button_lock = false; //Disable the task button lock
+});
+
+ipcMain.on("taskrefresh", (event) => {
+  win.show();
+  tasks.hide();
+  //tasks.show();
 });
 
 ipcMain.on("exit", (event) => {
