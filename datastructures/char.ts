@@ -113,6 +113,11 @@ export class Character {
             if (this.tasks[i].task.title === taskName){
                 //Add the xp
                 this.addxp(this.tasks[i].task.reward);
+                for (let j = 0; j < this.skills.length; j++){
+                    if (this.skills[j].title === this.tasks[i].skill){
+                        this.skills[j].experience = this.skills[j].experience + this.tasks[i].task.reward;
+                    }
+                }
                 //Handle if there are repeats left
                 if(this.tasks[i].num_repeats > 1) {
                     this.tasks[i].num_repeats -= 1;

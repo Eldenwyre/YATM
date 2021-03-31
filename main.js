@@ -180,7 +180,8 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     parseInt(_task_data.task_reward),
                     [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
                     parseInt(_task_data.task_inc),
-                    parseInt(_task_data.task_max_repeats)));
+                    parseInt(_task_data.task_max_repeats),
+                    lodash.cloneDeep(_task_data.task_skill)));
 
   json_io_js_1.saveData(character, "./saves/character.json");
   tasks.reload();
@@ -241,6 +242,7 @@ ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
   json_io_js_1.saveData(character, "./saves/character.json");
   tasks.reload();
+  skills.reload();
   win.reload();
 })
 

@@ -56,10 +56,16 @@
           </p>
           <p>
             <label for="task_max_repeats">
-              <span>Number of Repeats: </span>
+              <span>Number of Completions: </span>
               <strong><abbr title="required">*</abbr></strong>
             </label>
             <input type="int" id="task_max_repeats" name="tasknum">
+          </p>
+          <p>
+            <label for="task_skill">
+              <span>Enter the Skill (if any): </span>
+            </label>
+            <input type="text" id="task_skill" name="task_skill">
           </p>
         </section>
         <section>
@@ -95,7 +101,8 @@
       task_date : document.getElementById("task_date").value,
       task_reward : document.getElementById("task_reward").value,
       task_inc : document.getElementById("task_inc").value,
-      task_max_repeats : document.getElementById("task_max_repeats").value
+      task_max_repeats : document.getElementById("task_max_repeats").value,
+      task_skill : document.getElementById("task_skill").value
     }
     ipcRenderer.send("addTaskInformation", _task_data);
     };
