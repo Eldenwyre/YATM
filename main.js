@@ -173,10 +173,10 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
   character.addTask(new tasks_js_1.RepeatableTask(lodash.cloneDeep(_task_data.task_name),
                     lodash.cloneDeep(_task_data.task_desc),
                     lodash.cloneDeep(_task_data.task_date),
-                    _task_data.task_reward,
+                    parseInt(_task_data.task_reward),
                     [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
-                    _task_data.task_inc,
-                    _task_data.task_max_repeats));
+                    parseInt(_task_data.task_inc),
+                    parseInt(_task_data.task_max_repeats)));
   
   json_io_js_1.saveData(character, "./saves/character.json");
   tasks.reload();
@@ -186,7 +186,7 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   console.log("Test", _skill_data);
   character.addSkill(new skills_js_1.Skill(lodash.cloneDeep(_skill_data.skill_name),
   lodash.cloneDeep(_skill_data.skill_description),
-  _skill_data.skill_xp,
+  parseInt(_skill_data.skill_xp),
   []));
   json_io_js_1.saveData(character, "./saves/character.json");
   skills.reload();

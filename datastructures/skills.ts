@@ -27,22 +27,6 @@ export class Skill {
         this.task_sort_status = lodash.cloneDeep(task_sort_status);
     }
 
-    //Calculates level based on XP of skill
-    public getLevel(): number {
-        //XP_MIN is 21 for level 1
-        if (this.experience < 21) { 
-            return 0; 
-        }
-        //XP_MAX is 150409 for level 2500
-        else if (this.experience > 150000) { 
-            return 250; 
-        }
-        //Else use level curve
-        else {
-            return 1 + Math.pow(this.experience,0.49) - Math.pow(this.experience,0.38) - Math.pow(this.experience,0.07624);
-        }
-    }
-
     public sortTasks(method: string = this.task_sort_status.method, ascending: boolean = this.task_sort_status.ascending_flag) {
         //Control Ascending/Descending
         var x: number = 1;
