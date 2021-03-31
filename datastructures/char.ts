@@ -93,6 +93,45 @@ export class Character {
         return;
     }
 
+    public addxp(xp: number) {
+        if (typeof(xp) === "number"){
+            this.experience = this.experience + xp;
+        }
+        else {
+            try {
+                this.experience = this.experience + parseInt(xp);
+            } catch (error) {
+                console.log(error);
+                return;
+            }
+        }
+    }
+
+
+    public completeTask(taskName: string) {
+        for (let i = 0; i < this.tasks.length; i++){
+            if (this.tasks[i].task.title === taskName){
+                //Add the xp
+                this.addxp(this.tasks[i].task.reward);
+                //Handle if there are repeats left
+                if(this.tasks[i].num_repeats > 1) {
+                    this.tasks[i].num_repeats -= 1;
+                    //this.tasks[i].task.date.setDate(this.tasks[i].task.date.getDate() + this.tasks[i].repeat_increment);
+                }
+                else if (this.tasks[i].num_repeats < 0){
+                    //this.tasks[i].task.date.setDate(this.tasks[i].task.date.getDate() + this.tasks[i].repeat_increment);
+                }
+                else{
+                    //Delete the task
+                    this.tasks.splice(i,1);
+                }
+                //End the loop
+                i = this.tasks.length
+            }
+        }
+    }
+
+
     public addTask(task: RepeatableTask) {
         //Naive lazy way of implementing this but speed cost shouldn't be noticable
         this.tasks.push(lodash.cloneDeep(task));

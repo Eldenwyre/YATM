@@ -1,6 +1,6 @@
 import { Character } from './datastructures/char.js';
 import { getData, characterFromObj } from './json_io.js';
-
+import {ipcRenderer } from 'electron';
 var data = getData();
 var character = characterFromObj(data);
 
@@ -8,6 +8,7 @@ window.onload = () => {
   for (var i = 0; i < character.tasks.length; i++){
     var task = character.tasks[i]
     var Task = document.createElement('div');
+    Task.id = task.task.title;
     var img = document.createElement('img');
     var Name = document.createElement('h3');
     var Desc = document.createElement('p');
@@ -18,7 +19,9 @@ window.onload = () => {
     var Num_repeats = document.createElement('div');
     const button = document.createElement('button');
     button.innerText = 'Completed';
-    button.onclick = remove;
+    button.addEventListener('click', function(){
+      ipcRenderer.send("completeTask",this.parentElement.id);
+    });
     Task.className = 'taskTab';
 
     // Temporary use of the skill image as the background
@@ -50,11 +53,4 @@ window.onload = () => {
     Task.appendChild(button);
     document.getElementsByTagName('body')[0].appendChild(Task);
   }
-}
-
-function remove(event){
-  alert("Remove this task");
-//  document.getElementsByTagName('body')[0]removeChild(document.getElementsByTagName('body')[0][i]);
-//  const ipcRenderer = require('electron').ipcRenderer;
-//  ipcRenderer.send("taskrefresh");
 }

@@ -237,6 +237,13 @@ ipcMain.on("getSelectedSkill", (event) => {
   event.sender.send("recieveSelectedSkill",selectedSkill);
 });
 
+ipcMain.on("completeTask", (event, taskname) => {
+  character.completeTask(taskname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  tasks.reload();
+  win.reload();
+})
+
 ipcMain.on("test", (event,args) => {
   console.log("test");
   console.log(args)
