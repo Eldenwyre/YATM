@@ -1,4 +1,16 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
+
+//Req for character class to be in main
+const json_io_js_1 = require("./json_io.js");
+const char_js_1 = require("./datastructures/char.js");
+const tasks_js_1 = require("./datastructures/tasks.js");
+const skills_js_1 = require("./datastructures/skills.js");
+const lodash = require("lodash");
+
+//Load the character
+var data = json_io_js_1.getData();
+var character = json_io_js_1.characterFromObj(data);
+
 let win;
 let skills;
 let tasks;
@@ -147,12 +159,32 @@ ipcMain.on("addTaskClose", (event) => {
   add_task_lock = false; // Dsiable add task lock
 });
 
+//Send the character info whenever requested through sendCharacterInfo channel
+//Recieve with ipcRenderer.on("sendCharacterInfo", (event, data) => {}();
+ipcMain.on("requestCharacterInfo", (event) => {
+  data = {
+    name:character.name,
+    level:Math.trunc(character.getLevel())
+  }
+  event.sender.send("sendCharacterInfo", data);
+});
+
 ipcMain.on("addTaskInformation", (event, _task_data) => {
-  console.log("Test", _task_data);
+  character.addTask(new tasks_js_1.RepeatableTask(lodash.cloneDeep(_task_data.task_name),
+                    lodash.cloneDeep(_task_data.task_desc),
+                    lodash.cloneDeep(_task_data.task_date),
+                    _task_data.task_reward,
+                    [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
+                    _task_data.task_inc,
+                    _task_data.task_max_repeats));
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
   console.log("Test", _skill_data);
+  character.addSkill(new skills_js_1.Skill(lodash.cloneDeep(_skill_data.skill_name),
+  lodash.cloneDeep(_skill_data.skill_description),
+  _skill_data.skill_xp,
+  []));
 });
 
 //Closes the skills window and puts the focus back on the main window

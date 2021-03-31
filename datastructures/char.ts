@@ -95,7 +95,7 @@ export class Character {
 
     public addTask(task: RepeatableTask) {
         //Naive lazy way of implementing this but speed cost shouldn't be noticable
-        this.tasks.push(lodash.deepClone(task));
+        this.tasks.push(lodash.cloneDeep(task));
         this.sortTasks();
 
         return;
@@ -103,7 +103,7 @@ export class Character {
 
     public addSkill(skill : Skill) {
         //Naive lazy way of implementing this but speed cost shouldn't be noticable
-        this.skills.push(lodash.deepClone(skill));
+        this.skills.push(lodash.cloneDeep(skill));
         this.sortSkills();
 
         return;
