@@ -218,7 +218,7 @@ ipcMain.on("openSkillTaskWindow", (event, arg) => {
       frame: false,
       show: false,
       width: Math.round(size[0]/12*4.5),
-      height: size[1]-40,
+      height: size[1]-450,
       resizable: false,
       webPreferences: {
         nodeIntegration: true //Required to close the child window
