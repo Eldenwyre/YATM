@@ -25,11 +25,8 @@ window.onload = () => {
     Desc.className = 'taskDesc';
     Desc.innerHTML = task.task.description;
     Datetime.className = 'taskDate';
-    var currentTime = new Date();
-    var month = currentTime.getMonth() + 1;
-    var day = currentTime.getDate();
-    var year = currentTime.getFullYear();
-    Datetime.innerHTML = month + "/" + day + "/" + year;
+    var date = task.task.date.toString();
+    Datetime.innerHTML = date;
 
     // Add more to subtasks in the future
     Subtasks.className = 'taskSub';

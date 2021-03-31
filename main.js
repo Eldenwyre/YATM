@@ -177,6 +177,9 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
                     _task_data.task_inc,
                     _task_data.task_max_repeats));
+  
+  json_io_js_1.saveData(character, "./saves/character.json");
+  tasks.reload();
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
@@ -185,6 +188,8 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   lodash.cloneDeep(_skill_data.skill_description),
   _skill_data.skill_xp,
   []));
+  json_io_js_1.saveData(character, "./saves/character.json");
+  skills.reload();
 });
 
 //Closes the skills window and puts the focus back on the main window
