@@ -16,6 +16,9 @@ window.onload = () => {
     var Reward = document.createElement('h3');
     var Repeat_increment = document.createElement('div');
     var Num_repeats = document.createElement('div');
+    const button = document.createElement('button');
+    button.innerText = 'Completed';
+    button.onclick = remove;
     Task.className = 'taskTab';
 
     // Temporary use of the skill image as the background
@@ -44,6 +47,14 @@ window.onload = () => {
     Task.appendChild(Reward);
     Task.appendChild(Repeat_increment);
     Task.appendChild(Num_repeats);
+    Task.appendChild(button);
     document.getElementsByTagName('body')[0].appendChild(Task);
   }
+}
+
+function remove(event){
+  alert("Remove this task");
+//  document.getElementsByTagName('body')[0]removeChild(document.getElementsByTagName('body')[0][i]);
+//  const ipcRenderer = require('electron').ipcRenderer;
+//  ipcRenderer.send("taskrefresh");
 }
