@@ -1,0 +1,16 @@
+html, body, .container-fluid {
+  height: 100%;
+  background: lightyellow;
+}
+
+.col {
+  border: solid 1px #6c757d;
+}
+
+/*Sets the character to the center of the screen*/
+.Character{ 
+  top: 50%; 
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+}

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {},
-  "files":["external.ts",
+  "files":[
+    "index.ts",
     "skills.ts",
     "tasks.ts",
     "json_io.ts",
