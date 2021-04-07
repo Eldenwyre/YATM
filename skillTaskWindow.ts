@@ -1,25 +1,19 @@
-import { Character } from './datastructures/char.js';
-import { Skill } from './datastructures/skills.js';
-import { getData, characterFromObj } from './json_io.js';
-import {ipcRenderer} from 'electron';
+const ipcRenderer = require('electron').ipcRenderer;
 
-var data = getData();
-var character = characterFromObj(data);
-var skill_title: string;
+//Call to close the window on user click
+const butCloseSkillTask = document.getElementById('butCloseSkillTask');
+butCloseSkillTask.addEventListener('click', function () {
+    ipcRenderer.send("closeSkillTaskWindow"); // ipcRender.send will pass the information to main process
+});
 
-ipcRenderer.on("recieveSelectedSkill", (event, data) => {
-    skill_title = data;
-  });
+//Call for skill task/desc
+ipcRenderer.send("getSelectedSkillInfo");
+ipcRenderer.on("recieveSelectedSkillInfo", (event, data) => {
+    document.getElementById("skillName").innerHTML = data.title;
+    document.getElementById("skillDesc").innerHTML = "Description: " + data.description;
 
-ipcRenderer.send("test", skill_title);
-
-window.onload = () => {
-    ipcRenderer.send("getSelectedSkill");
-    ipcRenderer.send("test",1);
-    var skill: Skill = character.skills.find(skill => skill.title === skill_title);
-    ipcRenderer.send("test", skill);
-    for(var i = 0; i < skill.tasks.length; i++) {
-        var task = skill.tasks[i];
+    for(var i = 0; i < data.tasks.length; i++) {
+        var task = data.tasks[i];
 
         var docTask = document.createElement('div');
         var docImg = document.createElement('img');
@@ -57,5 +51,4 @@ window.onload = () => {
         docTask.appendChild(docNumRepeats);
         document.getElementById('taskList').appendChild(docTask);
     }
-}
-
+});
