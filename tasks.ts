@@ -2,10 +2,7 @@ import { Character } from './datastructures/char.js';
 import { getData, characterFromObj } from './json_io.js';
 import { ipcRenderer } from 'electron';
 
-const data = getData();
-var character = characterFromObj(data);
 var taskclose = document.getElementById('taskclose');
-
 taskclose.addEventListener('click', function () {
     ipcRenderer.send("taskclose"); // ipcRender.send will pass the information to main process
 });
@@ -14,6 +11,9 @@ const add = document.getElementById('addTaskWindow');
 add.addEventListener('click', function () {
   ipcRenderer.send("addTaskWindow"); //Calls the main process to close the program
 });
+
+const data = getData();
+var character = characterFromObj(data);
 
 window.onload = () => {
   for (var i = 0; i < character.tasks.length; i++){
