@@ -9,6 +9,7 @@
     "datastructures/char.ts",
     "datastructures/skills.ts",
     "datastructures/index.ts",
-    "datastructures/tasks.ts"
+    "datastructures/tasks.ts",
+    "skillForm.ts"
   ]
 }
