@@ -8,6 +8,7 @@
          the values of the below elements-->
     
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="skills.css">
     
   </head>
 
@@ -34,85 +35,7 @@
         <input type="image" src="images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
       </div>
     </div>
-
-    <!-- This script displays the current skills and information about the skills -->
-    <script>require('./skills.js');</script>
-
   </body>
-
-  <script>
-    window.$ = window.jquery = require("jquery");
-    window.popper = require("popper.js");
-    require("bootstrap");
-    require("./renderer.js");
-  </script>
-  
-  <style>
-      /* This style is the parent for the other pieces of information that will appear on every skill */
-      .skillTab{
-        position: relative;
-        width: 100%;
-        margin-top: 2.5%;
-        margin-left: 0%;
-        margin-bottom: 2.5%;
-      }
-
-      /* Style used to make the name of the skill appear in the designated box for names */
-      .skillName{
-        position: absolute;
-        margin-top: 3.5%;
-        top: 0%;
-        left: 5%;
-      }
-
-      /* Keeps the level for the skill in a specific spot */
-      .skillLevel{
-        position: absolute;
-        color: rgb(0, 15, 120);
-        top: 25%;
-        left: 5%;
-      }
-
-      .skillButton{
-        position: absolute;
-        bottom: 25%;
-        left: 3%;
-      }
-
-      /* Progress bar for each skill's experience */
-      .Xp{
-        -webkit-appearance: none;
-        position: absolute;
-        top: 30%;
-        left: 15%;
-        width: 65%;
-      }
-
-      .Xp::-webkit-progress-bar{
-        background: whitesmoke;
-        border-radius: 10px;
-      }
-
-      .Xp::-webkit-progress-value{
-        background: blue;
-        border-radius: 10px;
-      }
-      
-  </style>
 </html>
 
-<!--Script to call the main file to close the skills menu-->
-<script type="text/javascript">
-  const ipcRenderer = require('electron').ipcRenderer; 
-  const skillclose = document.getElementById('skillclose');
-  skillclose.addEventListener('click', function () {
-      ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
-  });
-
-  const skilladd = document.getElementById('addskill');
-  skilladd.addEventListener('click', function () {
-    ipcRenderer.send("addskill"); //Calls the main process to close the program
-  });
-</script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>require('./skills.js')</script>
