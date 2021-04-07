@@ -1,0 +1,77 @@
+.taskTab{
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-top: 3%;
+  margin-left: 0%;
+  margin-bottom: 2.5%;
+}
+
+.button{
+  position: absolute;
+  bottom:4em;
+  right:4em;
+  background-color:#8F0005;
+  border-radius:1.5em;
+  color:white;
+  text-transform:uppercase;
+  padding:1em 1.5em;
+}
+
+/* Style used to make the Name of the task appear in the designated box for Names */
+.taskName{
+  position: absolute;
+  margin-top: 3%;
+  top: 0%;
+  left: 5%;
+  width: 50%
+}
+
+/* Keeps the date for the task in a specific spot */
+.taskDate{
+  position: absolute;
+  margin-top: 3%;
+  top: 15%;
+  left: 5%;
+}
+
+/* Gives an area to the description */
+.taskDesc{
+  position: absolute;
+  margin-top: 3%;
+  top: 25%;
+  left: 10%;
+  width: 70%;
+  length: 50%;
+}
+
+/* Keeps the reward in a specific spot */
+.taskReward{
+  margin-top: 3%;
+  position: absolute;
+  top: 60%;
+  left: 5%;
+}
+
+/* Keeps the subtasks in a specific spot */
+.taskSub{
+  margin-top: 3%;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+}
+
+/* Keeps the repeating number in a specific spot */
+.taskRep{
+  position:absolute;
+  bottom: 15%;
+  left: 5%;
+  width: 20%;
+}
+
+/* Keeps the repeating increment in a specific spot */
+.taskInc{
+  position:absolute;
+  bottom: 15%;
+  left: 25%;
+}
