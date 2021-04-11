@@ -128,7 +128,7 @@ ipcMain.on("taskclick", (event) => {
       nodeIntegration: true
     }
   })
-  tasks.loadFile('tasks.html')
+  tasks.loadFile('tasks/tasks.html')
   tasks.show();
 });
 
@@ -152,7 +152,7 @@ ipcMain.on("addTaskWindow", (event) => {
       nodeIntegration: true //Required to close the child window
     }
   })
-  addtasks.loadFile('taskForm.html')
+  addtasks.loadFile('tasks/taskForm.html')
   addtasks.show();
 });
 

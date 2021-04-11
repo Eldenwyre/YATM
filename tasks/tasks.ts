@@ -1,5 +1,5 @@
-import { Character } from './datastructures/char.js';
-import { getData, characterFromObj } from './json_io.js';
+import { Character } from '../datastructures/char.js';
+import { getData, characterFromObj } from '../json_io.js';
 import { ipcRenderer } from 'electron';
 
 var taskclose = document.getElementById('taskclose');
@@ -36,7 +36,7 @@ window.onload = () => {
     Task.className = 'taskTab';
 
     // Temporary use of the skill image as the background
-    img.src = "images/Skill.png"
+    img.src = "../images/Skill.png"
     Name.className = 'taskName';
     Name.innerHTML = task.task.title;
     Desc.className = 'taskDesc';
