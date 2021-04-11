@@ -1,5 +1,5 @@
-import { Character } from './datastructures/char.js';
-import { getData, characterFromObj } from './json_io.js';
+import { Character } from '../datastructures/char.js';
+import { getData, characterFromObj } from '../json_io.js';
 import { ipcRenderer } from 'electron';
 
 const skillclose = document.getElementById('skillclose');
@@ -28,7 +28,7 @@ window.onload = () => {
     
     Skill.className = 'skillTab';
     Skill.id = skill.title; //FIXME Figure some other method that's better
-    img.src = "images/Skill.png"
+    img.src = "../images/Skill.png"
     Name.className = 'skillName';
     Name.innerHTML = skill.title;
     XP.className = 'Xp';
