@@ -45,6 +45,19 @@ app.on('ready', function createWindow () {
   win.once('ready-to-show', () => {
     win.show()
   });
+
+  //Moves the skills and tasks child windows with the main window
+  win.on('move', function() {
+    let position = win.getPosition();
+    let size = win.getSize();
+    let realsize = win.getContentSize();
+    if (skill_button_lock) {    
+      skills.setPosition(position[0]+10, position[1]+(size[1]-realsize[1]));
+      }
+    if (task_button_lock) {
+      tasks.setPosition(position[0]-10+Math.round(size[0]*.6), position[1]+(size[1]-realsize[1]));
+      }
+    });
 });
 
 ipcMain.on("skillclick", (event) => {
@@ -58,13 +71,14 @@ ipcMain.on("skillclick", (event) => {
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
   size = win.getSize()
+  realsize = win.getContentSize() //Retrieves size of win without title bar 
   skills = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    x: position[0],
-    y: position[1],
-    width: Math.round(size[0]/12*4.5),
-    height: size[1],
+    x: position[0]+10,
+    y: position[1]+(size[1]-realsize[1]),
+    width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
+    height: realsize[1]-10,
     resizable: false,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
@@ -115,14 +129,14 @@ ipcMain.on("taskclick", (event) => {
   task_button_lock = true; //Enable task button lock
   position = win.getPosition()
   size = win.getSize()
-  x = Math.round(position[0] + size[0]*(7.5/12)) //To set the task menu on the right side of the screen
+  realsize = win.getContentSize();
   tasks = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    x: x,
-    y: position[1],
-    width: Math.round(size[0]/12*4.5),
-    height: size[1],
+    x: position[0]-10+Math.round(size[0]*.6), //Moves the task window to the right side of the window
+    y: position[1]+(size[1]-realsize[1]),
+    width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
+    height: realsize[1]-10,
     resizable: false,
     webPreferences: {
       nodeIntegration: true
