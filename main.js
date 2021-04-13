@@ -84,7 +84,7 @@ ipcMain.on("skillclick", (event) => {
       nodeIntegration: true //Required to close the child window
     }
   })
-  skills.loadFile('skills.html')
+  skills.loadFile('skills/skills.html')
   skills.show();
 });
 
@@ -109,7 +109,7 @@ ipcMain.on("addskill", (event) => {
       nodeIntegration: true //Required to close the child window
     }
   })
-  addskills.loadFile('skillForm.html')
+  addskills.loadFile('skills/skillForm.html')
   addskills.show();
 });
 
@@ -142,7 +142,7 @@ ipcMain.on("taskclick", (event) => {
       nodeIntegration: true
     }
   })
-  tasks.loadFile('tasks.html')
+  tasks.loadFile('tasks/tasks.html')
   tasks.show();
 });
 
@@ -166,7 +166,7 @@ ipcMain.on("addTaskWindow", (event) => {
       nodeIntegration: true //Required to close the child window
     }
   })
-  addtasks.loadFile('taskForm.html')
+  addtasks.loadFile('tasks/taskForm.html')
   addtasks.show();
 });
 
@@ -239,7 +239,7 @@ ipcMain.on("openSkillTaskWindow", (event, arg) => {
       }
     });
     selectedSkill = arg; //REVIEW
-    skillTasks.loadFile('skillTaskWindow.html');
+    skillTasks.loadFile('skills/skillTaskWindow.html');
     skillTasks.show();
 });
 

@@ -1,8 +1,18 @@
-import { Character } from './datastructures/char.js';
-import { getData, characterFromObj } from './json_io.js';
-import {ipcRenderer} from 'electron';
+import { Character } from '../datastructures/char.js';
+import { getData, characterFromObj } from '../json_io.js';
+import { ipcRenderer } from 'electron';
 
-var data = getData();
+const skillclose = document.getElementById('skillclose');
+skillclose.addEventListener('click', function () {
+    ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
+});
+
+const skilladd = document.getElementById('addskill');
+skilladd.addEventListener('click', function () {
+  ipcRenderer.send("addskill"); //Calls the main process to close the program
+});
+
+const data = getData();
 var character = characterFromObj(data);
 
 window.onload = () => {
@@ -18,7 +28,7 @@ window.onload = () => {
     
     Skill.className = 'skillTab';
     Skill.id = skill.title; //FIXME Figure some other method that's better
-    img.src = "images/Skill.png"
+    img.src = "../images/Skill.png"
     Name.className = 'skillName';
     Name.innerHTML = skill.title;
     XP.className = 'Xp';

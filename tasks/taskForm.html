@@ -8,7 +8,7 @@
     <!-- Source our external script, which will allow us to change
          the values of the below elements-->
 
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
   </head>
 
@@ -75,29 +75,4 @@
   </body>
 </html>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
-<!--Script to call the main file to close the add task menu and handle passing info-->
-<script type="text/javascript">
-  const ipcRenderer = require('electron').ipcRenderer;
-  const addTaskClose = document.getElementById("addTaskClose");
-  addTaskClose.addEventListener('click', function () {
-      ipcRenderer.send("addTaskClose"); // ipcRender.send will pass the information to main process
-  });
-
-
-  function sendTaskForm(event){
-    //Get the values
-    
-    var _task_data = {
-      task_name : document.getElementById("task_name").value,
-      task_desc : document.getElementById("task_desc").value,
-      task_date : document.getElementById("task_date").value,
-      task_reward : document.getElementById("task_reward").value,
-      task_inc : document.getElementById("task_inc").value,
-      task_max_repeats : document.getElementById("task_max_repeats").value
-    }
-    ipcRenderer.send("addTaskInformation", _task_data);
-    };
-</script>
-
+<script> const { sendTaskForm } = require('./taskForm.js');</script>

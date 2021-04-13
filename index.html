@@ -5,45 +5,13 @@
     <meta charset="UTF-8">
     <title>TaskQuest</title>
 
-    <!-- Source our external script, which will allow us to change
-         the values of the below elements-->
-    
+    <!--Source stylesheets-->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script> require('./external.js');</script>
+    <link rel="stylesheet" href="index.css">
     
   </head>
   
   <body style="background: rgb(215, 215, 215);">
-  
-    <style>
-      html, body, .container-fluid {
-        height: 100%;
-        background: lightyellow;
-      }
-
-      .col {
-        border: solid 1px #6c757d;
-      }
-
-      /*Sets the character to the center of the screen*/
-      .Character{ 
-        top: 50%; 
-        left: 50%;
-        position: fixed;
-        transform: translate(-50%, -50%);
-      }
-  
-      /*Places an exit button at the top right of the screen*/
-      .Exit{
-        border: 0.15em solid #000000;
-        top: 0%;
-        right: 0%;
-        position: fixed;
-        transform: translate(-50%, 50%);
-        background-color: red;
-      }
-    </style>
-    
 
     <div class="container-fluid d-flex flex-column">
       <!--Header Area-->
@@ -84,46 +52,10 @@
         <div class="col-sm-5">
           <!--Nothing to see here :)-->
         </div>
-        
-
       </div>
     </div>
   </body>
-  
-  <script>    
-    window.$ = window.jquery = require("jquery");
-    window.popper = require("popper.js");
-    require("bootstrap");
-    require("./renderer.js");
-  </script>
 </html>
 
-<script type="text/javascript">
-  const ipcRenderer = require('electron').ipcRenderer; 
-
-  ipcRenderer.on("sendCharacterInfo", (event, data) => {
-    document.getElementById("charName").innerHTML = data.name;
-    document.getElementById("charLevel").innerHTML = data.level;
-  });
-
-  ipcRenderer.send("requestCharacterInfo", event);
-
-  const skillclick = document.getElementById('loadskills'); 
-  skillclick.addEventListener('click', function () {
-      ipcRenderer.send("skillclick"); // ipcRender.send will pass the information to main process
-      //It will call a function to open the skills.html file on screen
-  });
-  
-  const taskclick = document.getElementById('loadtasks');
-  taskclick.addEventListener('click', function () {
-      ipcRenderer.send("taskclick"); //Calls to open the tasks.html file on screen
-  });
-  
-  const quit = document.getElementById('exit');
-  quit.addEventListener('click', function () {
-    ipcRenderer.send("exit"); //Calls the main process to close the program
-  });
-</script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  
+<!-- Source our external script, which will allow us to change the values of the below elements-->
+<script> require('./index.js');</script>

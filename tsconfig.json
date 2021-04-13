@@ -1,13 +1,16 @@
 {
   "compilerOptions": {},
-  "files":["external.ts",
-    "skills.ts",
-    "tasks.ts",
+  "files":[
+    "index.ts",
     "json_io.ts",
-    "skillTaskWindow.ts",
     "datastructures/char.ts",
     "datastructures/skills.ts",
     "datastructures/index.ts",
-    "datastructures/tasks.ts"
+    "datastructures/tasks.ts",
+    "skills/skills.ts",
+    "skills/skillTaskWindow.ts",
+    "skills/skillForm.ts",
+    "tasks/tasks.ts",
+    "tasks/taskForm.ts"
   ]
 }
