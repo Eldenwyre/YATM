@@ -5,6 +5,7 @@ let SKILLSBAR: Boolean = false;
 let TASKSBAR: Boolean = false;
 
 ipcRenderer.on("getWinSize", (event, data) => {
+
   SIZE = Math.round(data[0]*.4); //Sets the width to a SIZE that will fit skills.html properly
 
   if(SKILLSBAR) {
@@ -58,6 +59,14 @@ const taskclick = document.getElementById('loadtasks');
 taskclick.addEventListener('click', function () {
   TASKSBAR = !TASKSBAR;
   document.getElementById("tasksSidebar").style.width = SIZE.toString() + "px";
+});
+
+ipcRenderer.on("openSidebar", (event, data) => {
+  if(data == "skills") {
+    SKILLSBAR = !SKILLSBAR;
+  } else if(data == "tasks") {
+    TASKSBAR = !TASKSBAR;
+  }
 });
 
 /*

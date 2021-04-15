@@ -42,8 +42,20 @@ app.on('ready', function createWindow () {
   win.loadFile('index.html');
 
   // File to render for the application window
-  win.once('ready-to-show', () => {
+  win.on('ready-to-show', () => {
     win.show()
+  });
+  win.on('show', () => {
+    if (task_button_lock === true) {
+      task_button_lock = false;
+      win.webContents.send("openSidebar", "tasks");
+      win.webContents.send("getWinSize", win.getSize());
+    }
+    if (skill_button_lock === true) {
+      skill_button_lock = false;
+      win.webContents.send("openSidebar", "skills");
+      win.webContents.send("getWinSize", win.getSize());
+    }
   });
 
   //Moves the skills and tasks child windows with the main window
@@ -52,47 +64,13 @@ app.on('ready', function createWindow () {
     let size = win.getSize();
     let realsize = win.getContentSize();
     win.webContents.send('getWinSize', size);
-    // if (skill_button_lock) {    
-    //   skills.setPosition(position[0]+10, position[1]+(size[1]-realsize[1]));
-    //   }
-    // if (task_button_lock) {
-    //   tasks.setPosition(position[0]-10+Math.round(size[0]*.6), position[1]+(size[1]-realsize[1]));
-    //   }
-    });
+  });
 });
 
 ipcMain.on("requestWinSize", (event) => {
   data = win.getSize();
   event.sender.send("getWinSize", data);
 });
-
-// ipcMain.on("skillclick", (event) => {
-//   //If button lock is activated, return immediately
-//   if (skill_button_lock) {
-//     return;
-//   }
-// 
-//   //Enable skill button lock
-//   skill_button_lock = true;
-//   position = win.getPosition() //Skill menu is set to take up the left third of the window
-//   //and will do so by checking the window
-//   size = win.getSize()
-//   realsize = win.getContentSize() //Retrieves size of win without title bar 
-//   skills = new BrowserWindow({ parent: win,
-//     frame: false,
-//     show: false,
-//     x: position[0]+10,
-//     y: position[1]+(size[1]-realsize[1]),
-//     width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
-//     height: realsize[1]-10,
-//     resizable: false,
-//     webPreferences: {
-//       nodeIntegration: true //Required to close the child window
-//     }
-//   })
-//   skills.loadFile('skills/skills.html')
-//   skills.show();
-// });
 
 ipcMain.on("addskill", (event) => {
   //if skill is locked, return, else lock and continue
@@ -124,32 +102,6 @@ ipcMain.on("addSkillClose", (event) => {
   addskills.hide()
   add_skill_lock = false; //Disable add skill lock
 });
-
-// ipcMain.on("taskclick", (event) => {
-//   //If button lock is activated, return immediately
-//   if (task_button_lock) {
-//     return;
-//   }
-// 
-//   task_button_lock = true; //Enable task button lock
-//   position = win.getPosition()
-//   size = win.getSize()
-//   realsize = win.getContentSize();
-//   tasks = new BrowserWindow({ parent: win,
-//     frame: false,
-//     show: false,
-//     x: position[0]-10+Math.round(size[0]*.6), //Moves the task window to the right side of the window
-//     y: position[1]+(size[1]-realsize[1]),
-//     width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
-//     height: realsize[1]-10,
-//     resizable: false,
-//     webPreferences: {
-//       nodeIntegration: true
-//     }
-//   })
-//   tasks.loadFile('tasks/tasks.html')
-//   tasks.show();
-// });
 
 ipcMain.on("addTaskWindow", (event) => {
   //Return if locked, otherwise continue
@@ -201,7 +153,8 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     parseInt(_task_data.task_max_repeats)));
 
   json_io_js_1.saveData(character, "./saves/character.json");
-  // tasks.reload();
+  win.reload();
+  task_button_lock = true;
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
@@ -212,21 +165,7 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   []));
   json_io_js_1.saveData(character, "./saves/character.json");
   win.reload();
-  win.webContents.send("openSideBar", "skills");
-});
-
-//Closes the skills window and puts the focus back on the main window
-ipcMain.on("skillclose", (event) => {
-  win.show()
-  skills.hide()
-  skill_button_lock = false; //Disable the skill button lock
-});
-
-//Closes the tasks window
-ipcMain.on("taskclose", (event) => {
-  win.show()
-  tasks.hide()
-  task_button_lock = false; //Disable the task button lock
+  skill_button_lock = true;
 });
 
 //Specific Skill Window
@@ -259,8 +198,8 @@ ipcMain.on("getSelectedSkill", (event) => {
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
   json_io_js_1.saveData(character, "./saves/character.json");
-  // tasks.reload();
   win.reload();
+  task_button_lock = true;
 })
 
 ipcMain.on("test", (event,args) => {
