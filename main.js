@@ -51,42 +51,48 @@ app.on('ready', function createWindow () {
     let position = win.getPosition();
     let size = win.getSize();
     let realsize = win.getContentSize();
-    if (skill_button_lock) {    
-      skills.setPosition(position[0]+10, position[1]+(size[1]-realsize[1]));
-      }
-    if (task_button_lock) {
-      tasks.setPosition(position[0]-10+Math.round(size[0]*.6), position[1]+(size[1]-realsize[1]));
-      }
+    win.webContents.send('getWinSize', size);
+    // if (skill_button_lock) {    
+    //   skills.setPosition(position[0]+10, position[1]+(size[1]-realsize[1]));
+    //   }
+    // if (task_button_lock) {
+    //   tasks.setPosition(position[0]-10+Math.round(size[0]*.6), position[1]+(size[1]-realsize[1]));
+    //   }
     });
 });
 
-ipcMain.on("skillclick", (event) => {
-  //If button lock is activated, return immediately
-  if (skill_button_lock) {
-    return;
-  }
-
-  //Enable skill button lock
-  skill_button_lock = true;
-  position = win.getPosition() //Skill menu is set to take up the left third of the window
-  //and will do so by checking the window
-  size = win.getSize()
-  realsize = win.getContentSize() //Retrieves size of win without title bar 
-  skills = new BrowserWindow({ parent: win,
-    frame: false,
-    show: false,
-    x: position[0]+10,
-    y: position[1]+(size[1]-realsize[1]),
-    width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
-    height: realsize[1]-10,
-    resizable: false,
-    webPreferences: {
-      nodeIntegration: true //Required to close the child window
-    }
-  })
-  skills.loadFile('skills/skills.html')
-  skills.show();
+ipcMain.on("requestWinSize", (event) => {
+  data = win.getSize();
+  event.sender.send("getWinSize", data);
 });
+
+// ipcMain.on("skillclick", (event) => {
+//   //If button lock is activated, return immediately
+//   if (skill_button_lock) {
+//     return;
+//   }
+// 
+//   //Enable skill button lock
+//   skill_button_lock = true;
+//   position = win.getPosition() //Skill menu is set to take up the left third of the window
+//   //and will do so by checking the window
+//   size = win.getSize()
+//   realsize = win.getContentSize() //Retrieves size of win without title bar 
+//   skills = new BrowserWindow({ parent: win,
+//     frame: false,
+//     show: false,
+//     x: position[0]+10,
+//     y: position[1]+(size[1]-realsize[1]),
+//     width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
+//     height: realsize[1]-10,
+//     resizable: false,
+//     webPreferences: {
+//       nodeIntegration: true //Required to close the child window
+//     }
+//   })
+//   skills.loadFile('skills/skills.html')
+//   skills.show();
+// });
 
 ipcMain.on("addskill", (event) => {
   //if skill is locked, return, else lock and continue
@@ -116,35 +122,34 @@ ipcMain.on("addskill", (event) => {
 ipcMain.on("addSkillClose", (event) => {
   win.show()
   addskills.hide()
-  skills.show();
   add_skill_lock = false; //Disable add skill lock
 });
 
-ipcMain.on("taskclick", (event) => {
-  //If button lock is activated, return immediately
-  if (task_button_lock) {
-    return;
-  }
-
-  task_button_lock = true; //Enable task button lock
-  position = win.getPosition()
-  size = win.getSize()
-  realsize = win.getContentSize();
-  tasks = new BrowserWindow({ parent: win,
-    frame: false,
-    show: false,
-    x: position[0]-10+Math.round(size[0]*.6), //Moves the task window to the right side of the window
-    y: position[1]+(size[1]-realsize[1]),
-    width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
-    height: realsize[1]-10,
-    resizable: false,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-  tasks.loadFile('tasks/tasks.html')
-  tasks.show();
-});
+// ipcMain.on("taskclick", (event) => {
+//   //If button lock is activated, return immediately
+//   if (task_button_lock) {
+//     return;
+//   }
+// 
+//   task_button_lock = true; //Enable task button lock
+//   position = win.getPosition()
+//   size = win.getSize()
+//   realsize = win.getContentSize();
+//   tasks = new BrowserWindow({ parent: win,
+//     frame: false,
+//     show: false,
+//     x: position[0]-10+Math.round(size[0]*.6), //Moves the task window to the right side of the window
+//     y: position[1]+(size[1]-realsize[1]),
+//     width: Math.round(size[0]*.4), //Sets the width to a size that will fit skills.html properly
+//     height: realsize[1]-10,
+//     resizable: false,
+//     webPreferences: {
+//       nodeIntegration: true
+//     }
+//   })
+//   tasks.loadFile('tasks/tasks.html')
+//   tasks.show();
+// });
 
 ipcMain.on("addTaskWindow", (event) => {
   //Return if locked, otherwise continue
@@ -173,7 +178,6 @@ ipcMain.on("addTaskWindow", (event) => {
 ipcMain.on("addTaskClose", (event) => {
   win.show();
   addtasks.hide();
-  tasks.show();
   add_task_lock = false; // Dsiable add task lock
 });
 
@@ -197,7 +201,7 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     parseInt(_task_data.task_max_repeats)));
 
   json_io_js_1.saveData(character, "./saves/character.json");
-  tasks.reload();
+  // tasks.reload();
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
@@ -207,7 +211,8 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   parseInt(_skill_data.skill_xp),
   []));
   json_io_js_1.saveData(character, "./saves/character.json");
-  skills.reload();
+  win.reload();
+  win.webContents.send("openSideBar", "skills");
 });
 
 //Closes the skills window and puts the focus back on the main window
@@ -254,7 +259,7 @@ ipcMain.on("getSelectedSkill", (event) => {
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
   json_io_js_1.saveData(character, "./saves/character.json");
-  tasks.reload();
+  // tasks.reload();
   win.reload();
 })
 

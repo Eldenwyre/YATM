@@ -2,55 +2,43 @@ import { Character } from '../datastructures/char.js';
 import { getData, characterFromObj } from '../json_io.js';
 import { ipcRenderer } from 'electron';
 
-const skillclose = document.getElementById('skillclose');
-skillclose.addEventListener('click', function () {
-    ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
-});
-
-const skilladd = document.getElementById('addskill');
-skilladd.addEventListener('click', function () {
-  ipcRenderer.send("addskill"); //Calls the main process to close the program
-});
-
 const data = getData();
 var character = characterFromObj(data);
 
-window.onload = () => {
-  var maximum = 150000; //Value to reach the max level
-  for (var i = 0; i < character.skills.length; i++) {
-    var skill = character.skills[i];
+var maximum = 150000; //Value to reach the max level
+for (var i = 0; i < character.skills.length; i++) {
+  var skill = character.skills[i];
 
-    var Skill = document.createElement('div');
-    var img = document.createElement('img');
-    var Name = document.createElement('h3');
-    var Level = document.createElement('h1');
-    var XP = document.createElement('progress')
-    
-    Skill.className = 'skillTab';
-    Skill.id = skill.title; //FIXME Figure some other method that's better
-    img.src = "../images/Skill.png"
-    Name.className = 'skillName';
-    Name.innerHTML = skill.title;
-    XP.className = 'Xp';
-    XP.max = maximum;
-    XP.value = skill.experience;
-    Level.className = 'skillLevel';
-    Level.innerHTML = Math.trunc(getLevel(skill.experience)).toString();
-    Skill.appendChild(img);
-    Skill.appendChild(Name);
-    Skill.appendChild(Level);
-    Skill.appendChild(XP);
-    var elem = document.createElement('input');
-    elem.type = 'button';
-    elem.value = 'Open ' + skill.title + ' menu';
-    elem.id = skill.title; //FIXME Figure some other method another time? Works for now...
-    elem.className = "skillButton"
-    Skill.appendChild(elem);
-    elem.addEventListener('click', function () {
-      ipcRenderer.send("openSkillTaskWindow", this.parentElement.id); // ipcRender.send will pass the information to main process
-    });
-    document.getElementsByTagName('body')[0].appendChild(Skill);
-  }
+  var Skill = document.createElement('div');
+  var img = document.createElement('img');
+  var Name = document.createElement('h3');
+  var Level = document.createElement('h1');
+  var XP = document.createElement('progress')
+  
+  Skill.className = 'skillTab';
+  Skill.id = skill.title; //FIXME Figure some other method that's better
+  img.src = "./images/Skill.png"
+  Name.className = 'skillName';
+  Name.innerHTML = skill.title;
+  XP.className = 'Xp';
+  XP.max = maximum;
+  XP.value = skill.experience;
+  Level.className = 'skillLevel';
+  Level.innerHTML = Math.trunc(getLevel(skill.experience)).toString();
+  Skill.appendChild(img);
+  Skill.appendChild(Name);
+  Skill.appendChild(Level);
+  Skill.appendChild(XP);
+  var elem = document.createElement('input');
+  elem.type = 'button';
+  elem.value = 'Open ' + skill.title + ' menu';
+  elem.id = skill.title; //FIXME Figure some other method another time? Works for now...
+  elem.className = "skillButton"
+  Skill.appendChild(elem);
+  elem.addEventListener('click', function () {
+    ipcRenderer.send("openSkillTaskWindow", this.parentElement.id); // ipcRender.send will pass the information to main process
+  });
+  document.getElementById('skillsRow').appendChild(Skill);
 }
 
 //Calculates level based on XP of skill
