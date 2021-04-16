@@ -72,6 +72,11 @@ ipcMain.on("requestWinSize", (event) => {
   event.sender.send("getWinSize", data);
 });
 
+ipcMain.on("recvSidebarInfo", (event, data) => {
+  task_button_lock = data.tasksbar;
+  skill_button_lock = data.skillsbar;
+});
+
 ipcMain.on("addskill", (event) => {
   //if skill is locked, return, else lock and continue
   if (add_skill_lock) {
@@ -170,6 +175,7 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
 
 //Specific Skill Window
 ipcMain.on("openSkillTaskWindow", (event, arg) => {
+  let size = win.getSize();
   skillTasks = new BrowserWindow(
     {
       parent: win,
@@ -198,9 +204,9 @@ ipcMain.on("getSelectedSkill", (event) => {
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
   json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
   win.reload();
-  task_button_lock = true;
-})
+});
 
 ipcMain.on("test", (event,args) => {
   console.log("test");

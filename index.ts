@@ -4,20 +4,37 @@ let SIZE: Number = 0;
 let SKILLSBAR: Boolean = false;
 let TASKSBAR: Boolean = false;
 
-ipcRenderer.on("getWinSize", (event, data) => {
-
-  SIZE = Math.round(data[0]*.4); //Sets the width to a SIZE that will fit skills.html properly
-
+function expand(){
   if(SKILLSBAR) {
     document.getElementById("skillsSidebar").style.width = SIZE.toString() + "px";
   }  
   if(TASKSBAR) {
     document.getElementById("tasksSidebar").style.width = SIZE.toString() + "px";
   }
+}
 
+function collapse(){
+  if(!SKILLSBAR) {
+    document.getElementById("skillsSidebar").style.width = "0";
+  }  
+  if(!TASKSBAR) {
+    document.getElementById("tasksSidebar").style.width = "0";
+  }
+}
+
+ipcRenderer.on("getWinSize", (event, data) => {
+  SIZE = Math.round(data[0]*.4);
 });
 
 ipcRenderer.send("requestWinSize", event);
+
+ipcRenderer.on("requestSidebarInfo", (event) => {
+  let data = {
+    skillsbar: SKILLSBAR,
+    tasksbar: TASKSBAR
+  }
+  ipcRenderer.send("recvSidebarInfo", data);
+});
 
 ipcRenderer.on("sendCharacterInfo", (event, data) => {
   document.getElementById("charName").innerHTML = data.name;
@@ -29,8 +46,7 @@ ipcRenderer.send("requestCharacterInfo", event);
 const skillclose = document.getElementById('skillclose');
 skillclose.addEventListener('click', function () {
   SKILLSBAR = !SKILLSBAR;
-    document.getElementById("skillsSidebar").style.width = "0";
-    // ipcRenderer.send("skillclose"); // ipcRender.send will pass the information to main process
+  collapse();
 });
 
 const skilladd = document.getElementById('addskill');
@@ -41,13 +57,13 @@ skilladd.addEventListener('click', function () {
 const skillclick = document.getElementById('loadskills'); 
 skillclick.addEventListener('click', function () {
   SKILLSBAR = !SKILLSBAR;
-  document.getElementById("skillsSidebar").style.width = SIZE.toString() + "px";
+  expand();
 });
 
 var taskclose = document.getElementById('taskclose');
 taskclose.addEventListener('click', function () {
   TASKSBAR = !TASKSBAR;
-  document.getElementById("tasksSidebar").style.width = "0";
+  collapse();
 });
 
 const add = document.getElementById('addTaskWindow');
@@ -58,15 +74,17 @@ add.addEventListener('click', function () {
 const taskclick = document.getElementById('loadtasks');
 taskclick.addEventListener('click', function () {
   TASKSBAR = !TASKSBAR;
-  document.getElementById("tasksSidebar").style.width = SIZE.toString() + "px";
+  expand();
 });
 
 ipcRenderer.on("openSidebar", (event, data) => {
   if(data == "skills") {
     SKILLSBAR = !SKILLSBAR;
-  } else if(data == "tasks") {
+  } 
+  if(data == "tasks") {
     TASKSBAR = !TASKSBAR;
   }
+  expand();
 });
 
 /*
