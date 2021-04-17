@@ -159,7 +159,8 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
 
   json_io_js_1.saveData(character, "./saves/character.json");
   win.reload();
-  task_button_lock = true;
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
@@ -169,8 +170,8 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   parseInt(_skill_data.skill_xp),
   []));
   json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send('requestSidebarInfo');
   win.reload();
-  skill_button_lock = true;
 });
 
 //Specific Skill Window
