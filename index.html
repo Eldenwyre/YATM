@@ -8,10 +8,69 @@
     <!--Source stylesheets-->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
-    
+    <link rel="stylesheet" href="skills/skills.css">
+    <link rel="stylesheet" href="tasks/tasks.css">
+
   </head>
   
   <body style="background: rgb(215, 215, 215);">
+
+    <!-- SIDEBARS -->
+
+    <!-- SKILLS SIDEBAR --> 
+    <div id="skillsSidebar" class="sidebar">
+      <!--<object type="text/html" data="skills/sidebar-skills.html">Error or something</object>-->
+
+      <center><h1>SKILLS!</center></h1>
+
+       <!--Adds a button to close the skills menu-->
+
+       <div class="row", id="skillsRow">
+        <div class="col-2">
+          <div>
+            <button id="skillclose" style="margin-left: 90%;
+              transform: translate(-50%, 0%);">Close!</button>
+          </div>
+        </div>
+        <div class="col-7">
+          <!--Nothing to see here-->
+        </div>
+        <div class="col-1">
+          <input type="image" src="./images/Add.png" name="addskill" id="addskill" width="25px" style="transform: translate(50%, 0%);">
+        </div>
+        <div class="col-1">
+          <input type="image" src="./images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
+        </div>
+       </div>
+
+    </div>
+    <!-- END SKILLS SIDEBAR -->
+
+    <!-- TASKS SIDEBAR -->
+    <div id="tasksSidebar" class="sidebar">
+    
+      <center><h1>TASKS!</center></h1>
+    
+      <!--Adds a button to close the task menu-->
+
+      <div class="row" id="tasksRow">
+        <div class="col-1">
+          <input type="image" src="./images/Add.png" name="addTaskWindow" id="addTaskWindow" width="25px" style="transform: translate(50%, 0%);">
+        </div>
+        <div class="col-2">
+          <input type="image" src="./images/Remove.png" width="25px" style = "transform: translate(50%, 0%);">
+        </div>
+        <div class="col-9">
+          <div>
+            <button id="taskclose" style="margin-left: 90%;
+              transform: translate(-50%, 0%);">Close!</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <!-- END TASKS SIDEBAR -->
+
+    <!-- END SIDEBARS -->
 
     <div class="container-fluid d-flex flex-column">
       <!--Header Area-->
@@ -58,4 +117,6 @@
 </html>
 
 <!-- Source our external script, which will allow us to change the values of the below elements-->
-<script> require('./index.js');</script>
+<script>require('./index.js');</script>
+<script>require('./skills/skills.js');</script>
+<script>require('./tasks/tasks.js');</script>

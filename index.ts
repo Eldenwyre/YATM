@@ -1,12 +1,40 @@
 import { ipcRenderer } from 'electron';
 
-// Not sure what this is yet
-/*
-window.$ = window.jquery = require("jquery");
-window.popper = require("popper.js");
-require("bootstrap");
-require("./renderer.js");
-*/
+let SIZE: Number = 0;
+let SKILLSBAR: Boolean = false;
+let TASKSBAR: Boolean = false;
+
+function expand(){
+  if(SKILLSBAR) {
+    document.getElementById("skillsSidebar").style.width = SIZE.toString() + "px";
+  }  
+  if(TASKSBAR) {
+    document.getElementById("tasksSidebar").style.width = SIZE.toString() + "px";
+  }
+}
+
+function collapse(){
+  if(!SKILLSBAR) {
+    document.getElementById("skillsSidebar").style.width = "0";
+  }  
+  if(!TASKSBAR) {
+    document.getElementById("tasksSidebar").style.width = "0";
+  }
+}
+
+ipcRenderer.on("getWinSize", (event, data) => {
+  SIZE = Math.round(data[0]*.4);
+});
+
+ipcRenderer.send("requestWinSize", event);
+
+ipcRenderer.on("requestSidebarInfo", (event) => {
+  let data = {
+    skillsbar: SKILLSBAR,
+    tasksbar: TASKSBAR
+  }
+  ipcRenderer.send("recvSidebarInfo", data);
+});
 
 ipcRenderer.on("sendCharacterInfo", (event, data) => {
   document.getElementById("charName").innerHTML = data.name;
@@ -15,15 +43,48 @@ ipcRenderer.on("sendCharacterInfo", (event, data) => {
 
 ipcRenderer.send("requestCharacterInfo", event);
 
+const skillclose = document.getElementById('skillclose');
+skillclose.addEventListener('click', function () {
+  SKILLSBAR = !SKILLSBAR;
+  collapse();
+});
+
+const skilladd = document.getElementById('addskill');
+skilladd.addEventListener('click', function () {
+  ipcRenderer.send("addskill"); //Calls the main process to close the program
+});
+
 const skillclick = document.getElementById('loadskills'); 
 skillclick.addEventListener('click', function () {
-    ipcRenderer.send("skillclick"); // ipcRender.send will pass the information to main process
-    //It will call a function to open the skills.html file on screen
+  SKILLSBAR = !SKILLSBAR;
+  expand();
+});
+
+var taskclose = document.getElementById('taskclose');
+taskclose.addEventListener('click', function () {
+  TASKSBAR = !TASKSBAR;
+  collapse();
+});
+
+const add = document.getElementById('addTaskWindow');
+add.addEventListener('click', function () {
+  ipcRenderer.send("addTaskWindow"); //Calls the main process to close the program
 });
 
 const taskclick = document.getElementById('loadtasks');
 taskclick.addEventListener('click', function () {
-    ipcRenderer.send("taskclick"); //Calls to open the tasks.html file on screen
+  TASKSBAR = !TASKSBAR;
+  expand();
+});
+
+ipcRenderer.on("openSidebar", (event, data) => {
+  if(data == "skills") {
+    SKILLSBAR = !SKILLSBAR;
+  } 
+  if(data == "tasks") {
+    TASKSBAR = !TASKSBAR;
+  }
+  expand();
 });
 
 /*
