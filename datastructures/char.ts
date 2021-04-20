@@ -46,11 +46,11 @@ export class Character {
 
         //Alphabetically sort skills
         if (method === "alpha") {
-            this.skills.sort((a,b) => (a.title > b.title) ? x : ((b.title > a.title) ? -x : 0));
+            this.skills = this.skills.sort((a,b) => (a.title > b.title) ? x : ((b.title > a.title) ? -x : 0));
         }
         //Sort by level/xp
         else if ((method === "level") || (method === "xp")){
-            this.skills.sort((a,b) => (a.experience > b.experience) ? x : ((b.experience > a.experience) ? -x : 0));
+            this.skills = this.skills.sort((a,b) => (a.experience > b.experience) ? x : ((b.experience > a.experience) ? -x : 0));
         }
         //Invalid method
         else {
@@ -70,23 +70,23 @@ export class Character {
         {
             x = -1;
         }
-
         //Sort by date
         if (method === "date") {
-            this.tasks.sort((a,b) => (a.task.date.valueOf() > b.task.date.valueOf()) ? x : ((b.task.date.valueOf() > a.task.date.valueOf()) ? -x : 0));
+            this.tasks = this.tasks.sort((a,b) => (a.task.date.valueOf() > b.task.date.valueOf()) ? x : ((b.task.date.valueOf() > a.task.date.valueOf()) ? -x : 0));
         }
         else if (method === "alpha") {
-            this.tasks.sort((a,b) => (a.task.title > b.task.title) ? x : ((b.task.title > a.task.title) ? -x : 0));
+            this.tasks = this.tasks.sort((a,b) => (a.task.title > b.task.title) ? x : ((b.task.title > a.task.title) ? -x : 0));
         }
         //Sort by level/xp
         else if ((method === "level") || (method === "xp")){
-            this.tasks.sort((a,b) => (a.task.reward > b.task.reward) ? x : ((b.task.reward > a.task.reward) ? -x : 0));
+            this.tasks = this.tasks.sort((a,b) => (a.task.reward > b.task.reward) ? x : ((b.task.reward > a.task.reward) ? -x : 0));
         }
         //Invalid method
         else {
             console.log(`ERROR (INVALID METHOD for Character.sortTasks()): Could not sort strings with the method: ${method}`);
             return; //Prevents method from being changed
         }
+        console.log(this.tasks)
 
         //Save new sort method
         this.task_sort_status = new SortStatus(method,ascending);
