@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="tasks/tasks.css">
 
   </head>
-  
-  <body style="background: rgb(215, 215, 215);">
+
+  <body style="overflow: hidden;">
 
     <!-- SIDEBARS -->
 
-    <!-- SKILLS SIDEBAR --> 
+    <!-- SKILLS SIDEBAR -->
     <div id="skillsSidebar" class="sidebar">
       <!--<object type="text/html" data="skills/sidebar-skills.html">Error or something</object>-->
 
@@ -48,9 +48,9 @@
 
     <!-- TASKS SIDEBAR -->
     <div id="tasksSidebar" class="sidebar">
-    
+
       <center><h1>TASKS!</center></h1>
-    
+
       <!--Adds a button to close the task menu-->
 
       <div class="row" id="tasksRow">
@@ -67,15 +67,15 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <!-- END TASKS SIDEBAR -->
 
     <!-- END SIDEBARS -->
 
-    <div class="container-fluid d-flex flex-column">
+    <div class="d-flex flex-column">
       <!--Header Area-->
       <span class="border border-dark">
-        <div class="row"  style="background-color: rgb(170,150,255);">  
+        <div class="row"  style="background-color: rgb(170,150,255);">
           <div class="col-sm-4">
             <button id="loadskills" style="float: left;">Skills</button>
           </div>
@@ -83,7 +83,7 @@
           <div class="col-sm-4">
             <!--<center>Welcome to TaskQuest!</center>-->
           </div>
-          
+
           <div class="col-sm-4">
             <button id="loadtasks" style="float: right;">Tasks</button>
           </div>
@@ -91,8 +91,9 @@
       </span>
 
       <!--Skill/Task/Character Area-->
-      <div class="row flex-fill" style="background-color:rgb(180,170,255);">
-        
+      <div class="row flex-fill" style="background: url('images/stone_brick.jpg'); overflow: hidden;">
+        <img src="images/stone_brick.jpg" height = 100% width = 100%/>
+
         <!--Skills-->
         <div class="col-sm-5" style="background-color: rgb(180,170,255);">
           <center>Test</center>
@@ -101,12 +102,12 @@
         <!--Character/Center Panel-->
         <div class="col-sm-2 " style="background-color: rgb(180,170,255);">
           <div class="Character">
-            <div class="row"><center><a id="charName"></a></center></div> 
+            <div class="row"><center><a id="charName"></a></center></div>
             <div class="row"><center>Level: <a id=charLevel></a></center></div>
             <img src="images/temp_char.png" height = "200"/>
           </div>
         </div>
-        
+
         <!--Tasks-->
         <div class="col-sm-5">
           <!--Nothing to see here :)-->
