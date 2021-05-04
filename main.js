@@ -59,7 +59,7 @@ app.on('ready', function createWindow () {
   });
 
   //Moves the skills and tasks child windows with the main window
-  win.on('move', function() {
+  win.on('resize', function() {
     let position = win.getPosition();
     let size = win.getSize();
     let realsize = win.getContentSize();
