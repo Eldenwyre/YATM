@@ -1,6 +1,15 @@
 html, body, .container-fluid {
+  background-color: #cccccc;
   height: 100%;
   background: lightyellow;
+}
+
+.backdropGrass{
+  background-repeat:repeat-x;
+  bottom: 0%;
+  height: 45%;
+  width: 100%;
+  position: fixed;
 }
 
 .col {
@@ -8,8 +17,8 @@ html, body, .container-fluid {
 }
 
 /*Sets the character to the center of the screen*/
-.Character{ 
-  top: 50%; 
+.Character{
+  top: 50%;
   left: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
