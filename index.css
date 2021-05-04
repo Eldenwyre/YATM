@@ -12,6 +12,14 @@ html, body, .container-fluid {
   position: fixed;
 }
 
+.backdropSky{
+  background-repeat:repeat-x;
+  top: 0%;
+  height: 55%;
+  width: 100%;
+  position: fixed;
+}
+
 .col {
   border: solid 1px #6c757d;
 }
