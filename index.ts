@@ -24,6 +24,7 @@ function collapse(){
 
 ipcRenderer.on("getWinSize", (event, data) => {
   SIZE = Math.round(data[0]*.4);
+  expand();
 });
 
 ipcRenderer.send("requestWinSize", event);
