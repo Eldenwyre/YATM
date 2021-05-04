@@ -246,6 +246,21 @@ ipcMain.on("completeTask", (event, taskname) => {
   win.reload();
 });
 
+ipcMain.on("deleteTask", (event, taskname) => {
+  character.deleteTask(taskname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
+
+
+ipcMain.on("deleteSkill", (event, skillname) => {
+  character.deleteSkill(skillname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
+
 ipcMain.on("test", (event,args) => {
   console.log("test");
   console.log(args)

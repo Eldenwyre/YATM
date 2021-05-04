@@ -22,6 +22,11 @@ for (var i = 0; i < character.tasks.length; i++){
   button.addEventListener('click', function(){
     ipcRenderer.send("completeTask",this.parentElement.id);
   });
+  const delete_button = document.createElement('button');
+  delete_button.innerText = "Delete";
+  delete_button.addEventListener('click', function(){
+    ipcRenderer.send("deleteTask", this.parentElement.id);
+  })
   Task.className = 'taskTab';
 
   // Temporary use of the skill image as the background
@@ -51,5 +56,6 @@ for (var i = 0; i < character.tasks.length; i++){
   Task.appendChild(Repeat_increment);
   Task.appendChild(Num_repeats);
   Task.appendChild(button);
+  Task.appendChild(delete_button);
   document.getElementById('tasksRow').appendChild(Task);
 }

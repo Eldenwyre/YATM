@@ -142,11 +142,22 @@ export class Character {
         return;
     }
 
+
+    public deleteTask(task_name: String) {
+        this.tasks = this.tasks.filter( x => { return x.task.title != task_name })
+        return;
+    }
+
     public addSkill(skill : Skill) {
         //Naive lazy way of implementing this but speed cost shouldn't be noticable
         this.skills.push(lodash.cloneDeep(skill));
         this.sortSkills();
 
+        return;
+    }
+
+    public deleteSkill(skill_name: String) {
+        this.skills = this.skills.filter( x => { return x.title != skill_name })
         return;
     }
 
