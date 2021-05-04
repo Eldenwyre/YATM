@@ -10,14 +10,16 @@ export class Character {
     private task_sort_status: SortStatus;   //Stores last sort method for tasks
     public skills: Array<Skill>;        //Stores the user's skills
     private skill_sort_status: SortStatus;  //Stores last sort method for skills
+    public selected_sprite: string; //Stores character customization status
 
-    constructor(name: string, experience: number, tasks: Array<RepeatableTask>, skills: Array<Skill>, skill_sort_status: SortStatus = new SortStatus("alpha",true), task_sort_status: SortStatus = new SortStatus("date",true)) {
+    constructor(name: string, experience: number, tasks: Array<RepeatableTask>, skills: Array<Skill>, skill_sort_status: SortStatus = new SortStatus("alpha",true), task_sort_status: SortStatus = new SortStatus("date",true), selected_sprite: string) {
         this.name = name;
         this.experience = experience;
         this.tasks = lodash.cloneDeep(tasks);
         this.task_sort_status = lodash.cloneDeep(task_sort_status);
         this.skills = lodash.cloneDeep(skills);
         this.skill_sort_status = lodash.cloneDeep(skill_sort_status);
+        this.selected_sprite = selected_sprite;
     }
 
     //Calculates level based on XP of skill
@@ -150,5 +152,9 @@ export class Character {
 
     public save() {
       saveData(this);
+    }
+
+    public get_sprite() {
+        return this.selected_sprite;
     }
 }
