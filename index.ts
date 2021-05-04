@@ -64,10 +64,8 @@ ipcRenderer.on("sendCharacterSpriteNumber", (event, data) => {
   //Sprite Button Check, determines whether button should be shown or not.
   if(data.sprite_value === "0"){
     document.getElementById("sprite_button_left").hidden = true;
-    document.getElementById("sprite_button_right").hidden = false;
   }
-  else if(data.sprite_value === MAX_SPRITE_VAL.toString()){
-    document.getElementById("sprite_button_left").hidden = false;
+  if(parseInt(data.sprite_value,10) >= MAX_SPRITE_VAL){
     document.getElementById("sprite_button_right").hidden = true;
   }
 });
