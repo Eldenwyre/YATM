@@ -17,6 +17,7 @@ for (var i = 0; i < character.tasks.length; i++){
   var Reward = document.createElement('h3');
   var Repeat_increment = document.createElement('div');
   var Num_repeats = document.createElement('div');
+  var skill = document.createElement('div');
   const button = document.createElement('button');
   button.innerText = 'Completed';
   button.addEventListener('click', function(){
@@ -47,6 +48,8 @@ for (var i = 0; i < character.tasks.length; i++){
   Repeat_increment.innerHTML = task.repeat_increment.toString();
   Num_repeats.className = 'taskRep';
   Num_repeats.innerHTML = task.num_repeats.toString();
+  skill.className = 'taskSkill';
+  skill.innerHTML = task.skill;
   Task.appendChild(img);
   Task.appendChild(Name);
   Task.appendChild(Desc);
@@ -55,6 +58,7 @@ for (var i = 0; i < character.tasks.length; i++){
   Task.appendChild(Reward);
   Task.appendChild(Repeat_increment);
   Task.appendChild(Num_repeats);
+  Task.appendChild(skill);
   Task.appendChild(button);
   Task.appendChild(delete_button);
   document.getElementById('tasksRow').appendChild(Task);
