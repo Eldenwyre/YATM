@@ -11,7 +11,6 @@ const lodash = require("lodash");
 var data = json_io_js_1.getData();
 var character = json_io_js_1.characterFromObj(data);
 
-
 //Window objects
 let win; // Main window
 let skills; // Skills Tab
@@ -23,6 +22,16 @@ let skill_button_lock=false; //Locks the skill button when pressed until window 
 let task_button_lock=false; //Locks the task button when pressed until window is closed.
 let add_skill_lock = false; //Locks the add skill button when pressed until window is closed.
 let add_task_lock = false; //Locks the add task button when pressed until window is closed.
+
+
+//Stores highestsprite value of X for images/character/char_X.png
+const HIGHEST_SPRITE_VALUE = 11
+
+//Returns the Max sprite level, should be lower of the levelgradient/HIGHEST_SPRITE_VALUE of files
+function getMaxSprite(){
+  return Math.min(Math.floor(character.getLevel() / 10), HIGHEST_SPRITE_VALUE)
+}
+
 
 app.allowRendererProcessReuse = true
 
@@ -139,7 +148,7 @@ ipcMain.on("addTaskClose", (event) => {
 });
 
 //Send the character info whenever requested through sendCharacterInfo channel
-//Recieve with ipcRenderer.on("sendCharacterInfo", (event, data) => {}();
+//Recieve with ipcRenderer.on("sendCharacterInfo", (event, data) => {});
 ipcMain.on("requestCharacterInfo", (event) => {
   data = {
     name:character.name,
@@ -148,6 +157,34 @@ ipcMain.on("requestCharacterInfo", (event) => {
   event.sender.send("sendCharacterInfo", data);
 });
 
+//Send the character sprite info whenever requested through sendCharacterSpriteNumber
+//Recieve with ipcRenderer.on("sendCharacterSpriteNumber", (event, data) =>{});
+ipcMain.on("requestCharacterSpriteNumber", (event) => {
+  data = {
+    sprite_value : character.get_sprite(),
+    max_sprite_value : getMaxSprite()
+  }
+  event.sender.send("sendCharacterSpriteNumber", data);  
+})
+
+//Edits sprite value
+ipcMain.on("changeCharSpriteNumber", (event, data) => {
+  value_requested = (parseInt(character.selected_sprite, 10) + data);
+  //Checks for the value being high or low
+  if(value_requested < 0){
+    value_requested = 0;
+  }
+  else if(value_requested > getMaxSprite()){
+    value_requested = getMaxSprite();
+  }
+  character.selected_sprite = value_requested.toString();
+  //Save Character
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.reload();
+  //Checks for bounds
+});
+
+
 ipcMain.on("addTaskInformation", (event, _task_data) => {
   character.addTask(new tasks_js_1.RepeatableTask(lodash.cloneDeep(_task_data.task_name),
                     lodash.cloneDeep(_task_data.task_desc),
@@ -155,8 +192,8 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     parseInt(_task_data.task_reward),
                     [], //TODO add subtask functionality lodash.cloneDeep(taskInfo.task_subtasks),
                     parseInt(_task_data.task_inc),
-                    parseInt(_task_data.task_max_repeats)));
-
+                    parseInt(_task_data.task_max_repeats),
+                    lodash.cloneDeep(_task_data.task_skill)));
   json_io_js_1.saveData(character, "./saves/character.json");
   win.reload();
   win.webContents.send("requestSidebarInfo");
@@ -164,11 +201,9 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
 });
 
 ipcMain.on("addSkillInformation", (event, _skill_data) => {
-  console.log("Test", _skill_data);
   character.addSkill(new skills_js_1.Skill(lodash.cloneDeep(_skill_data.skill_name),
   lodash.cloneDeep(_skill_data.skill_description),
-  parseInt(_skill_data.skill_xp),
-  []));
+  parseInt(_skill_data.skill_xp)));
   json_io_js_1.saveData(character, "./saves/character.json");
   win.webContents.send('requestSidebarInfo');
   win.reload();
@@ -204,6 +239,21 @@ ipcMain.on("getSelectedSkill", (event) => {
 
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
+
+ipcMain.on("deleteTask", (event, taskname) => {
+  character.deleteTask(taskname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
+
+
+ipcMain.on("deleteSkill", (event, skillname) => {
+  character.deleteSkill(skillname);
   json_io_js_1.saveData(character, "./saves/character.json");
   win.webContents.send("requestSidebarInfo");
   win.reload();

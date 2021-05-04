@@ -14,7 +14,8 @@ export function sendTaskForm(event){
     task_date : (<HTMLInputElement>document.getElementById("task_date")).value,
     task_reward : (<HTMLInputElement>document.getElementById("task_reward")).value,
     task_inc : (<HTMLInputElement>document.getElementById("task_inc")).value,
-    task_max_repeats : (<HTMLInputElement>document.getElementById("task_max_repeats")).value
+    task_max_repeats : (<HTMLInputElement>document.getElementById("task_max_repeats")).value,
+    task_skill : (<HTMLInputElement>document.getElementById("task_skill")).value
   }
   ipcRenderer.send("addTaskInformation", _task_data);
 };

@@ -10,14 +10,16 @@ export class Character {
     private task_sort_status: SortStatus;   //Stores last sort method for tasks
     public skills: Array<Skill>;        //Stores the user's skills
     private skill_sort_status: SortStatus;  //Stores last sort method for skills
+    public selected_sprite: string; //Stores character customization status
 
-    constructor(name: string, experience: number, tasks: Array<RepeatableTask>, skills: Array<Skill>, skill_sort_status: SortStatus = new SortStatus("alpha",true), task_sort_status: SortStatus = new SortStatus("date",true)) {
+    constructor(name: string, experience: number, tasks: Array<RepeatableTask>, skills: Array<Skill>, skill_sort_status: SortStatus = new SortStatus("alpha",true), task_sort_status: SortStatus = new SortStatus("date",true), selected_sprite: string) {
         this.name = name;
         this.experience = experience;
         this.tasks = lodash.cloneDeep(tasks);
         this.task_sort_status = lodash.cloneDeep(task_sort_status);
         this.skills = lodash.cloneDeep(skills);
         this.skill_sort_status = lodash.cloneDeep(skill_sort_status);
+        this.selected_sprite = selected_sprite;
     }
 
     //Calculates level based on XP of skill
@@ -113,6 +115,11 @@ export class Character {
             if (this.tasks[i].task.title === taskName){
                 //Add the xp
                 this.addxp(this.tasks[i].task.reward);
+                for (let j = 0; j < this.skills.length; j++){
+                    if (this.skills[j].title === this.tasks[i].skill){
+                        this.skills[j].experience = this.skills[j].experience + this.tasks[i].task.reward;
+                    }
+                }
                 //Handle if there are repeats left
                 if(this.tasks[i].num_repeats > 1) {
                     this.tasks[i].num_repeats -= 1;
@@ -140,6 +147,12 @@ export class Character {
         return;
     }
 
+
+    public deleteTask(task_name: String) {
+        this.tasks = this.tasks.filter( x => { return x.task.title != task_name })
+        return;
+    }
+
     public addSkill(skill : Skill) {
         //Naive lazy way of implementing this but speed cost shouldn't be noticable
         this.skills.push(lodash.cloneDeep(skill));
@@ -148,7 +161,16 @@ export class Character {
         return;
     }
 
+    public deleteSkill(skill_name: String) {
+        this.skills = this.skills.filter( x => { return x.title != skill_name })
+        return;
+    }
+
     public save() {
       saveData(this);
+    }
+
+    public get_sprite() {
+        return this.selected_sprite;
     }
 }

@@ -44,6 +44,36 @@ ipcRenderer.on("sendCharacterInfo", (event, data) => {
 
 ipcRenderer.send("requestCharacterInfo", event);
 
+//Listener for Sprite Changing Buttons
+const char_sprite_decrease = document.getElementById('sprite_button_left'); 
+char_sprite_decrease.addEventListener('click', function () {
+  ipcRenderer.send("changeCharSpriteNumber", -1);
+});
+const char_sprite_increase = document.getElementById('sprite_button_right'); 
+char_sprite_increase.addEventListener('click', function () {
+  ipcRenderer.send("changeCharSpriteNumber", 1);
+});
+
+
+//Gets Character Sprite
+ipcRenderer.on("sendCharacterSpriteNumber", (event, data) => {
+  var MAX_SPRITE_VAL = data.max_sprite_value; //Should probably get an actual check for this at one point.
+  let char_sprite_loc = "images/character/char_" + data.sprite_value + ".png";
+  document.getElementById("character_image").setAttribute("src",char_sprite_loc);
+
+  //Sprite Button Check, determines whether button should be shown or not.
+  if(data.sprite_value === "0"){
+    document.getElementById("sprite_button_left").hidden = true;
+  }
+  if(parseInt(data.sprite_value,10) >= MAX_SPRITE_VAL){
+    document.getElementById("sprite_button_right").hidden = true;
+  }
+});
+
+//Make Request for Character Sprite Number
+ipcRenderer.send("requestCharacterSpriteNumber", event);
+
+
 const skillclose = document.getElementById('skillclose');
 skillclose.addEventListener('click', function () {
   SKILLSBAR = !SKILLSBAR;

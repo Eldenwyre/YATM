@@ -72,10 +72,9 @@
 
     <!-- END SIDEBARS -->
 
-    <div class="d-flex flex-column">
-      <!--Header Area-->
-      <span class="border border-dark">
-        <div class="row"  style="background-color: rgb(170,150,255);">
+      <!--Skill/Task/Character Area-->
+      <div style="background-image: url('images/sky.png');" class="backdropSky">
+        <div class="row">
           <div class="col-sm-4">
             <button id="loadskills" style="float: left;">Skills</button>
           </div>
@@ -88,29 +87,40 @@
             <button id="loadtasks" style="float: right;">Tasks</button>
           </div>
         </div>
-      </span>
 
-      <!--Skill/Task/Character Area-->
-      <div class="row flex-fill" style="background: url('images/stone_brick.jpg'); overflow: hidden;">
-        <img src="images/stone_brick.jpg" height = 100% width = 100%/>
 
-        <!--Skills-->
-        <div class="col-sm-5" style="background-color: rgb(180,170,255);">
-          <center>Test</center>
-        </div>
+        <div style="background-image: url('images/grass.png');" class="backdropGrass">
+          <!---<img src="images/grass.png" class="backdropGrass"/>--->
 
-        <!--Character/Center Panel-->
-        <div class="col-sm-2 " style="background-color: rgb(180,170,255);">
-          <div class="Character">
-            <div class="row"><center><a id="charName"></a></center></div>
-            <div class="row"><center>Level: <a id=charLevel></a></center></div>
-            <img src="images/temp_char.png" height = "200"/>
+          <div class="row flex-fill" style="background: url('images/stone_brick.jpg'); overflow: hidden;">
+
+            <!--Skills-->
+            <div class="col-sm-5" style="background-color: rgb(180,170,255);">
+
+            </div>
+
+            <!--Character/Center Panel-->
+            <div class="col-sm-2 " style="background-color: rgb(180,170,255);">
+              <div class="Character">
+                <div class="row"><center><a id="charName"></a></center></div>
+                <div class="row"><center>Level: <a id=charLevel></a></center></div>
+                <img id="character_image" src="" height = "192"/>
+                <div class="row">
+                  <div class= "col flex-fill" style="border: 0;">
+                    <center>
+                      <input type="image" id="sprite_button_left" src="images/arrow_left.png">
+                      <input type="image" id="sprite_button_right" src="images/arrow_right.png">
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Tasks-->
+            <div class="col-sm-5">
+              <!--Nothing to see here :)-->
+            </div>
           </div>
-        </div>
-
-        <!--Tasks-->
-        <div class="col-sm-5">
-          <!--Nothing to see here :)-->
         </div>
       </div>
     </div>

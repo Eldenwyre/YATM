@@ -38,6 +38,13 @@ for (var i = 0; i < character.skills.length; i++) {
   elem.addEventListener('click', function () {
     ipcRenderer.send("openSkillTaskWindow", this.parentElement.id); // ipcRender.send will pass the information to main process
   });
+  const delete_button = document.createElement('button');
+  delete_button.innerText = "Delete";
+  delete_button.addEventListener('click', function(){
+    ipcRenderer.send("deleteSkill", this.parentElement.id);
+  })
+  Skill.appendChild(delete_button)
+
   document.getElementById('skillsRow').appendChild(Skill);
 }
 

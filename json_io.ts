@@ -41,6 +41,7 @@ export function characterFromObj(data) {
                                       lodash.cloneDeep(data.skills),
                                       lodash.cloneDeep(data.task_sort_status),
                                       lodash.cloneDeep(data.skill_sort_status),
+                                      data.selected_sprite,
   );
   return char;
 }
