@@ -11,7 +11,7 @@
 /* Style used to make the name of the skill appear in the designated box for names */
 .skillName{
   position: absolute;
-  margin-top: 3.5%;
+  margin-top: 3%;
   top: 0%;
   left: 5%;
 }
