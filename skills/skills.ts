@@ -18,7 +18,7 @@ for (var i = 0; i < character.skills.length; i++) {
   
   Skill.className = 'skillTab';
   Skill.id = skill.title; //FIXME Figure some other method that's better
-  img.src = path.resolve(__dirname, "../images/Skill.png");
+  img.src = path.resolve(__dirname, "../images/newSkill.png");
   Name.className = 'skillName';
   Name.innerHTML = skill.title;
   XP.className = 'Xp';

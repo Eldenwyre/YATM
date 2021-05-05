@@ -32,7 +32,7 @@ for (var i = 0; i < character.tasks.length; i++){
   Task.className = 'taskTab';
 
   // Temporary use of the skill image as the background
-  img.src = path.resolve(__dirname, "../images/Skill.png");
+  img.src = path.resolve(__dirname, "../images/newSkill.png");
   Name.className = 'taskName';
   Name.innerHTML = task.task.title;
   Desc.className = 'taskDesc';

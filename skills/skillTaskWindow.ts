@@ -29,7 +29,7 @@ ipcRenderer.on("recieveSelectedSkillInfo", (event, data) => {
         docTask.className="taskTab";
 
         //Build the elements
-        docImg.src = path.resolve(__dirname, "../images/Skill.png");
+        docImg.src = path.resolve(__dirname, "../images/newSkill.png");
         docName.className = "taskName";
         docName.innerHTML = task.task.title;
         docDesc.className = "taskDesc";
