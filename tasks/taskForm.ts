@@ -13,7 +13,7 @@ export function sendTaskForm(event){
     task_desc : (<HTMLInputElement>document.getElementById("task_desc")).value,
     task_date : (<HTMLInputElement>document.getElementById("task_date")).value,
     task_reward : (<HTMLInputElement>document.getElementById("task_reward")).value,
-    task_inc : (<HTMLInputElement>document.getElementById("task_inc")).value,
+    task_inc : 1, //(<HTMLInputElement>document.getElementById("task_inc")).value,    PLACEHOLDER FOR PRES
     task_max_repeats : (<HTMLInputElement>document.getElementById("task_max_repeats")).value,
     task_skill : (<HTMLInputElement>document.getElementById("task_skill")).value
   }

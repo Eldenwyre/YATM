@@ -15,6 +15,7 @@ for (var i = 0; i < character.skills.length; i++) {
   var Name = document.createElement('h3');
   var Level = document.createElement('h1');
   var XP = document.createElement('progress')
+  var desc = document.createElement('p');
   
   Skill.className = 'skillTab';
   Skill.id = skill.title; //FIXME Figure some other method that's better
@@ -26,20 +27,25 @@ for (var i = 0; i < character.skills.length; i++) {
   XP.value = skill.experience;
   Level.className = 'skillLevel';
   Level.innerHTML = Math.trunc(getLevel(skill.experience)).toString();
+  desc.innerHTML = skill.description;
+  desc.id='skillDesc';
+  desc.className = 'skillDesc';
   Skill.appendChild(img);
   Skill.appendChild(Name);
   Skill.appendChild(Level);
   Skill.appendChild(XP);
+  Skill.appendChild(desc);
   var elem = document.createElement('input');
   elem.type = 'button';
   elem.value = 'Open ' + skill.title + ' menu';
   elem.id = skill.title; //FIXME Figure some other method another time? Works for now...
   elem.className = "skillButton"
-  Skill.appendChild(elem);
+  //Skill.appendChild(elem);
   elem.addEventListener('click', function () {
     ipcRenderer.send("openSkillTaskWindow", this.parentElement.id); // ipcRender.send will pass the information to main process
   });
   const delete_button = document.createElement('button');
+  delete_button.className = 'skillDelete'
   delete_button.innerText = "Delete";
   delete_button.addEventListener('click', function(){
     ipcRenderer.send("deleteSkill", this.parentElement.id);

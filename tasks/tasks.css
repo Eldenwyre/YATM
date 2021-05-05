@@ -21,8 +21,8 @@
 /* Style used to make the Name of the task appear in the designated box for Names */
 .taskName{
   position: absolute;
-  margin-top: 3%;
-  top: 0%;
+  margin-top: 7.5%;
+  top: 2%;
   left: 5%;
 }
 
@@ -30,7 +30,7 @@
 .taskDate{
   position: absolute;
   margin-top: 3%;
-  top: 15%;
+  top: 0%;
   left: 5%;
 }
 
@@ -41,14 +41,13 @@
   top: 25%;
   left: 10%;
   width: 70%;
-  length: 50%;
 }
 
 /* Keeps the reward in a specific spot */
 .taskReward{
   margin-top: 3%;
   position: absolute;
-  top: 60%;
+  bottom: 20%;
   left: 5%;
 }
 
@@ -65,7 +64,6 @@
   position:absolute;
   bottom: 15%;
   left: 5%;
-  width: 20%;
 }
 
 /* Keeps the repeating increment in a specific spot */
@@ -77,6 +75,6 @@
 
 .taskSkill{
   position:absolute;
-  top: 10%;
+  bottom: 15%;
   right: 15%;
 }
