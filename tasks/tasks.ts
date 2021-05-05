@@ -1,6 +1,7 @@
 import { Character } from '../datastructures/char.js';
 import { getData, characterFromObj } from '../json_io.js';
 import { ipcRenderer } from 'electron';
+const path = require('path');
 
 const data = getData();
 var character = characterFromObj(data);
@@ -31,7 +32,7 @@ for (var i = 0; i < character.tasks.length; i++){
   Task.className = 'taskTab';
 
   // Temporary use of the skill image as the background
-  img.src = "./images/Skill.png"
+  img.src = path.resolve(__dirname, "../images/Skill.png");
   Name.className = 'taskName';
   Name.innerHTML = task.task.title;
   Desc.className = 'taskDesc';

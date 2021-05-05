@@ -1,4 +1,5 @@
 const ipcRenderer = require('electron').ipcRenderer;
+const path = require('path');
 
 //Call to close the window on user click
 const butCloseSkillTask = document.getElementById('butCloseSkillTask');
@@ -28,7 +29,7 @@ ipcRenderer.on("recieveSelectedSkillInfo", (event, data) => {
         docTask.className="taskTab";
 
         //Build the elements
-        docImg.src = "../images/Skill.png";
+        docImg.src = path.resolve(__dirname, "../images/Skill.png");
         docName.className = "taskName";
         docName.innerHTML = task.task.title;
         docDesc.className = "taskDesc";

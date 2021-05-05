@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
 
+const path = require('path');
+
 //Req for character class to be in main
 const json_io_js_1 = require("./json_io.js");
 const char_js_1 = require("./datastructures/char.js");
@@ -179,7 +181,7 @@ ipcMain.on("changeCharSpriteNumber", (event, data) => {
   }
   character.selected_sprite = value_requested.toString();
   //Save Character
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.reload();
   //Checks for bounds
 });
@@ -194,7 +196,7 @@ ipcMain.on("addTaskInformation", (event, _task_data) => {
                     parseInt(_task_data.task_inc),
                     parseInt(_task_data.task_max_repeats),
                     lodash.cloneDeep(_task_data.task_skill)));
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.reload();
   win.webContents.send("requestSidebarInfo");
   win.reload();
@@ -204,7 +206,7 @@ ipcMain.on("addSkillInformation", (event, _skill_data) => {
   character.addSkill(new skills_js_1.Skill(lodash.cloneDeep(_skill_data.skill_name),
   lodash.cloneDeep(_skill_data.skill_description),
   parseInt(_skill_data.skill_xp)));
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.webContents.send('requestSidebarInfo');
   win.reload();
 });
@@ -239,14 +241,14 @@ ipcMain.on("getSelectedSkill", (event) => {
 
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.webContents.send("requestSidebarInfo");
   win.reload();
 });
 
 ipcMain.on("deleteTask", (event, taskname) => {
   character.deleteTask(taskname);
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.webContents.send("requestSidebarInfo");
   win.reload();
 });
@@ -254,7 +256,7 @@ ipcMain.on("deleteTask", (event, taskname) => {
 
 ipcMain.on("deleteSkill", (event, skillname) => {
   character.deleteSkill(skillname);
-  json_io_js_1.saveData(character, "./saves/character.json");
+  json_io_js_1.saveData(character, path.resolve(__dirname, "saves/character.json"));
   win.webContents.send("requestSidebarInfo");
   win.reload();
 });

@@ -1,4 +1,5 @@
 import { ipcRenderer } from 'electron';
+const path = require('path');
 
 let SIZE: Number = 0;
 let SKILLSBAR: Boolean = false;
@@ -58,7 +59,7 @@ char_sprite_increase.addEventListener('click', function () {
 //Gets Character Sprite
 ipcRenderer.on("sendCharacterSpriteNumber", (event, data) => {
   var MAX_SPRITE_VAL = data.max_sprite_value; //Should probably get an actual check for this at one point.
-  let char_sprite_loc = "images/character/char_" + data.sprite_value + ".png";
+  let char_sprite_loc = path.resolve(__dirname, "images/character/char_" + data.sprite_value + ".png");
   document.getElementById("character_image").setAttribute("src",char_sprite_loc);
 
   //Sprite Button Check, determines whether button should be shown or not.

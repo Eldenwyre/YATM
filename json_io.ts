@@ -1,5 +1,6 @@
 const fs = require('fs');
 const lodash = require('lodash');
+const path = require('path');
 import { Character } from './datastructures/char.js';
 import { RepeatableTask } from './datastructures/tasks.js'
 import { Skill } from './datastructures/skills.js'
@@ -9,7 +10,7 @@ import { Skill } from './datastructures/skills.js'
 // conflicts on the file
 
 // Default save file location
-const SAVEFILE = "saves/character.json";
+const SAVEFILE = path.resolve(__dirname, "saves/character.json");
 
 export function getData(file: string = SAVEFILE) {
   try {
