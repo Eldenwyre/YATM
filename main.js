@@ -30,10 +30,13 @@ app.allowRendererProcessReuse = true
 app.on('ready', function createWindow () {
   win = new BrowserWindow({
     frame: true,
+    autoHideMenuBar: true,
     resizable: true,
     fullscreen: false,
     width: 1280,
     height: 720,
+    minWidth: 900,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: true,
     show: false
@@ -84,12 +87,14 @@ ipcMain.on("addskill", (event) => {
 
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
-  size = win.getSize()
+  size = win.getContentSize()
   addskills = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    x: position[0]+8, //Puts the window on the left side of the screen, but not off of the main window
+    y: position[1]+31,
+    width: Math.round(size[0]*(1.0/3)),
+    height: size[1],
     resizable: true,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
@@ -141,12 +146,14 @@ ipcMain.on("addTaskWindow", (event) => {
   add_task_lock = true; //
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
-  size = win.getSize()
+  size = win.getContentSize()
   addtasks = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    x: position[0]+8+Math.round(size[0]*(2.0/3)), //Math to put the window on the right side
+    y: position[1]+31,
+    width: Math.round(size[0]*(1.0/3)),
+    height: size[1],
     resizable: true,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
@@ -172,6 +179,34 @@ ipcMain.on("requestCharacterInfo", (event) => {
   }
   event.sender.send("sendCharacterInfo", data);
 });
+
+//Send the character sprite info whenever requested through sendCharacterSpriteNumber
+//Recieve with ipcRenderer.on("sendCharacterSpriteNumber", (event, data) =>{});
+ipcMain.on("requestCharacterSpriteNumber", (event) => {
+  data = {
+    sprite_value : character.get_sprite(),
+    max_sprite_value : getMaxSprite()
+  }
+  event.sender.send("sendCharacterSpriteNumber", data);  
+})
+
+//Edits sprite value
+ipcMain.on("changeCharSpriteNumber", (event, data) => {
+  value_requested = (parseInt(character.selected_sprite, 10) + data);
+  //Checks for the value being high or low
+  if(value_requested < 0){
+    value_requested = 0;
+  }
+  else if(value_requested > getMaxSprite()){
+    value_requested = getMaxSprite();
+  }
+  character.selected_sprite = value_requested.toString();
+  //Save Character
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.reload();
+  //Checks for bounds
+});
+
 
 ipcMain.on("addTaskInformation", (event, _task_data) => {
   character.addTask(new tasks_js_1.RepeatableTask(lodash.cloneDeep(_task_data.task_name),
@@ -241,10 +276,24 @@ ipcMain.on("getSelectedSkill", (event) => {
 ipcMain.on("completeTask", (event, taskname) => {
   character.completeTask(taskname);
   json_io_js_1.saveData(character, "./saves/character.json");
-  tasks.reload();
-  skills.reload();
+  win.webContents.send("requestSidebarInfo");
   win.reload();
-})
+});
+
+ipcMain.on("deleteTask", (event, taskname) => {
+  character.deleteTask(taskname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
+
+
+ipcMain.on("deleteSkill", (event, skillname) => {
+  character.deleteSkill(skillname);
+  json_io_js_1.saveData(character, "./saves/character.json");
+  win.webContents.send("requestSidebarInfo");
+  win.reload();
+});
 
 ipcMain.on("test", (event,args) => {
   console.log("test");

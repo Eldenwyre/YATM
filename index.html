@@ -71,12 +71,34 @@
           <center>Test</center>
         </div>
 
-        <!--Character/Center Panel-->
-        <div class="col-sm-2 " style="background-color: rgb(180,170,255);">
-          <div class="Character">
-            <div class="row"><center><a id="charName"></a></center></div> 
-            <div class="row"><center>Level: <a id=charLevel></a></center></div>
-            <img src="images/temp_char.png" height = "200"/>
+        <div style="background-image: url('images/grass.png');" class="backdropGrass">
+          <!---<img src="images/grass.png" class="backdropGrass"/>--->
+
+          <div class="row flex-fill" style="overflow: hidden;">
+
+            <!--Skills-->
+            <div class="col-sm-5" style="background-color: rgb(180,170,255);">
+
+            </div>
+
+            <!--Character/Center Panel-->
+            <div class="col-sm-2 " style="background-color: rgb(180,170,255);">
+              <div class="Character">
+                <div class="row"><center><a id="charName"></a></center></div>
+                <div class="row"><center>Level: <a id=charLevel></a></center></div>
+                <img id="character_image" src="" height = "192"/>
+                <div class="row">
+                  <div class= "col flex-fill" style="border: 0;">
+                    <center>
+                      <input type="image" id="sprite_button_left" src="images/arrow_left.png">
+                      <input type="image" id="sprite_button_right" src="images/arrow_right.png">
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
         
