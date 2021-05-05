@@ -5,7 +5,7 @@ html, body, .container-fluid {
 }
 
 .backdropGrass{
-  background-repeat:repeat-x;
+  background-repeat:repeat;
   bottom: 0%;
   height: 45%;
   width: 100%;
@@ -13,7 +13,7 @@ html, body, .container-fluid {
 }
 
 .backdropSky{
-  background-repeat:repeat-x;
+  background-repeat:repeat;
   top: 0%;
   height: 55%;
   width: 100%;

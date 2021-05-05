@@ -41,10 +41,13 @@ app.allowRendererProcessReuse = true
 app.on('ready', function createWindow () {
   win = new BrowserWindow({
     frame: true,
+    autoHideMenuBar: true,
     resizable: true,
     fullscreen: false,
     width: 1280,
     height: 720,
+    minWidth: 900,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: true,
     show: false
@@ -98,12 +101,14 @@ ipcMain.on("addskill", (event) => {
 
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
-  size = win.getSize()
+  size = win.getContentSize()
   addskills = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    x: position[0]+8, //Puts the window on the left side of the screen, but not off of the main window
+    y: position[1]+31,
+    width: Math.round(size[0]*(1.0/3)),
+    height: size[1],
     resizable: true,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
@@ -128,12 +133,14 @@ ipcMain.on("addTaskWindow", (event) => {
   add_task_lock = true; //
   position = win.getPosition() //Skill menu is set to take up the left third of the window
   //and will do so by checking the window
-  size = win.getSize()
+  size = win.getContentSize()
   addtasks = new BrowserWindow({ parent: win,
     frame: false,
     show: false,
-    width: Math.round(size[0]/3),
-    height: size[1]-40,
+    x: position[0]+8+Math.round(size[0]*(2.0/3)), //Math to put the window on the right side
+    y: position[1]+31,
+    width: Math.round(size[0]*(1.0/3)),
+    height: size[1],
     resizable: true,
     webPreferences: {
       nodeIntegration: true //Required to close the child window
